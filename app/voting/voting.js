@@ -9,6 +9,8 @@ angular.module('myApp.voting', ['ngRoute'])
   });
 }])
 
-.controller('votingCtrl', [function() {
-
-}]);
+.controller('votingCtrl', function($scope) {
+    $scope.myFunction = function() {
+        alert('dd');
+    }
+});
