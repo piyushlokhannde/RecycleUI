@@ -11,6 +11,9 @@ angular.module('myApp.voting', ['ngRoute'])
 
 .controller('votingCtrl', function($scope) {
     $scope.myFunction = function() {
-        alert('dd');
+    	
+
+
+        alert(angular.toJson($scope.TeamMember));
     }
 });
