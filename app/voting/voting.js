@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.voting', ['ngRoute'])
+angular.module('myApp.voting', ['ngRoute', 'ngResource'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/voting', {
@@ -9,11 +9,24 @@ angular.module('myApp.voting', ['ngRoute'])
   });
 }])
 
-.controller('votingCtrl', function($scope) {
-    $scope.myFunction = function() {
-    	
+.factory('MemberService', function ($resource) {
+    return $resource('http://10.253.191.67:3000/teammembers/:teammember',{teammember: "@teammember"});
+})
+
+.controller('votingCtrl', function($scope , MemberService) {
+    $scope.saveMember = function() {  	
+
+    	MemberService.save(angular.toJson($scope.TeamMember));
+        alert("Team Member Saved");
+    }
 
 
-        alert(angular.toJson($scope.TeamMember));
+    $scope.getMember = function() {
+
+    	 
+    	$scope.TeamMember = MemberService.get({teammember: $scope.TeamMember.ID});
+    	alert("Team Member Fetched");
+
     }
 });
+

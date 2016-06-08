@@ -1,10 +1,10 @@
 {
-  "name": "angular-seed",
+  "name": "recycleui",
   "private": true,
   "version": "0.0.0",
-  "description": "A starter project for AngularJS",
+  "description": "Recycle Project For Sprint",
   "repository": "https://github.com/angular/angular-seed",
-  "license": "MIT",
+  "license": "Recycle",
   "devDependencies": {
     "bower": "^1.7.7",
     "http-server": "^0.9.0",

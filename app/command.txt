@@ -1,0 +1,2 @@
+http-server -a 10.253.191.67 -p 8000
+json-server --watch db.json
