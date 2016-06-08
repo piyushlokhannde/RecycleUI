@@ -3,3 +3,14 @@
   Showing of 'interpolate' filter:
   {{ 'Current version is v%VERSION%.' | interpolate }}
 </p>
+
+<div  ng-app="myApp.dashboard" >
+    <nvd3-line-chart
+        data="exampleData"
+        showXAxis="true"
+        showYAxis="true"
+        tooltips="true"
+        interactive="true">
+    </nvd3-line-chart>
+
+</div>
