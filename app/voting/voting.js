@@ -16,15 +16,29 @@ angular.module('myApp.voting', ['ngRoute', 'ngResource'])
 .controller('votingCtrl', function($scope , MemberService) {
     $scope.saveMember = function() {  	
 
-    	MemberService.save(angular.toJson($scope.TeamMember));
-        alert("Team Member Saved");
+    	MemberService.save(angular.toJson($scope.TeamMember),
+
+    		function(success) {
+    			alert("Team Member Saved");
+    			alert(angular.toJson(success));
+    			
+    		},
+    		function(err) {
+    			alert("Team Member Not saved");
+    			alert(angular.toJson(err));
+    			
+    		}
+    		);
+        
     }
 
 
     $scope.getMember = function() {
 
     	 
-    	$scope.TeamMember = MemberService.get({teammember: $scope.TeamMember.ID});
+    	$scope.TeamMember = MemberService.get({teammember: $scope.TeamMember.ID}
+
+    		);
     	alert("Team Member Fetched");
 
     }
