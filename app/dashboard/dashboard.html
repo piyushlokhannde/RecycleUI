@@ -6,14 +6,31 @@
 
 <div class="container-fluid"  ng-app="myApp.dashboard"   ng-controller="dashboardCtrl" >  
     <br>
-	<div class="row" id="id1">
-	     <div class="col-sm-12"  >
-	     	<div class="well">
-	     		<h4>Dashboard</h4>      
+    <div class="row"   >
+	     <div class="col-sm-6 "  id="id1">
+	     	<div class="well" style="box-shadow: 10px 10px 5px #888888;">
+	     		<h4>Performance Of The Teams</h4>      
+	    		<nvd3-line-chart
+					data="exampleDataperf"
+    				id="peroftheteam"    
+    				showXAxis="true"
+    				showYAxis="true"
+	        		useInteractiveGuideLine="true"
+	        		showLegend="true" 
+	        		tooltips="true"
+    				>
+       				 <svg height="300"></svg>
+				</nvd3-line-chart>
+	     	</div>
+	     </div>
+	      <div class="col-sm-6 "  id="id2" >
+	     	<div class="well" style="box-shadow: 10px 10px 5px #888888;">
+	     		<h4>Goals Comparions</h4>      
 	    		<nvd3-multi-bar-chart
 	    			data="exampleData1"
-	        		id="toolTipExample"	        			        		
+	        		id="toolTipExample1"	        			        		
 	        		showXAxis="true"
+	        		xAxisTickFormat="xAxisTickFormatFormat()"
 	        		showYAxis="true"
 	        		interactive="true"
 	        		showLegend="true" 
@@ -23,33 +40,41 @@
 	     	</div>
 	     </div>
 	</div>  
-	<div class="row" id="id2" >	
-		<div class="col-sm-6"   >
-	     	<div class="well">
-	     		<h4>Team Innovation Contributon</h4>
-             <nvd3-pie-chart 
-      data="exampleData2" 
-      id="exampleId"     
-      x="xFunction()" 
-      y="yFunction()" 
-      interactive="true"
-      staggerLabels="true"
-      showLabels="false" 
-      showLegend="true" 
-      tooltips="true">
-      <svg width="500" height="400"></svg>
-      </nvd3-pie-chart >	    		
+	<div class="row">	
+		<div class="col-sm-3"  id="id3" >
+			<div class="well" style="box-shadow: 10px 10px 5px #888888;">
+				<h4>Team Innovation Contributon</h4>
+				<nvd3-pie-chart 
+      				data="exampleData2" 
+      				id="exampleId"     
+      				x="xFunction()" 
+      				y="yFunction()" 
+					margin="{left:0,top:0,bottom:0,right:0}"
+      				interactive="true"
+      				staggerLabels="true"
+      				showLabels="false" 
+      				showLegend="true" 
+      				tooltips="true">		
+      				<svg width="300" height="300" ></svg>
+      			</nvd3-pie-chart >
+			</div>			
+		</div>
+		<div class="col-sm-9"  id="id4">
+	     		<div class="well" style="box-shadow: 10px 10px 5px #888888;">
+	     			<h4>Individual Score</h4>      
+	    			<nvd3-multi-bar-chart
+	    			data="exampleData4"
+	        		id="individualchart"	        			        		
+	        		showXAxis="true"	        		
+	        		showYAxis="true"
+	        		interactive="true"
+	        		showLegend="true"	        		
+	        		tooltips="true">
+	        			<svg  height="300"></svg>
+	    		</nvd3-multi-bar-chart>
+	     		</div>
 	     	</div>
-	     </div>
-
-	     <div class="col-sm-6" >
-	     	<div class="well">
-	     		<h4>Dashboard</h4>      
-	    		
-	     	</div>
-	     </div>	    
-	</div> 
-	<div class="container drop-shadow">
+	</div>
 
 </div>   
   
