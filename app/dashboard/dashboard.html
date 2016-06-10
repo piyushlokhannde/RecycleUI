@@ -6,27 +6,25 @@
 
 <div class="container-fluid"  ng-app="myApp.dashboard"   ng-controller="dashboardCtrl" >  
     <br>
-	<div class="row">
+	<div class="row" id="id1">
 	     <div class="col-sm-12"  >
 	     	<div class="well">
 	     		<h4>Dashboard</h4>      
 	    		<nvd3-multi-bar-chart
 	    			data="exampleData1"
-	        		id="toolTipExample"
-	        		width="550"
-	        		height="350"
-	        		xAxisTickFormat="xAxisTickFormatFunction()"
+	        		id="toolTipExample"	        			        		
 	        		showXAxis="true"
 	        		showYAxis="true"
 	        		interactive="true"
+	        		showLegend="true" 
 	        		tooltips="true">
-	        			<svg></svg>
+	        			<svg  height="300"></svg>
 	    		</nvd3-multi-bar-chart>
 	     	</div>
 	     </div>
 	</div>  
-	<div class="row">	
-		<div class="col-sm-6" >
+	<div class="row" id="id2" >	
+		<div class="col-sm-6"   >
 	     	<div class="well">
 	     		<h4>Team Innovation Contributon</h4>
              <nvd3-pie-chart 
@@ -34,10 +32,12 @@
       id="exampleId"     
       x="xFunction()" 
       y="yFunction()" 
+      interactive="true"
       staggerLabels="true"
       showLabels="false" 
-      showLegend="true" >
-      <svg width='300' height='300'></svg>
+      showLegend="true" 
+      tooltips="true">
+      <svg width="500" height="400"></svg>
       </nvd3-pie-chart >	    		
 	     	</div>
 	     </div>
@@ -49,6 +49,8 @@
 	     	</div>
 	     </div>	    
 	</div> 
+	<div class="container drop-shadow">
+
 </div>   
   
 
