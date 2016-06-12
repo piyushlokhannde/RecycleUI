@@ -1,15 +1,29 @@
-<p>This is the partial for dashboard.</p>
-<p>
-  Showing of 'interpolate' filter:
-  {{ 'Current version is v%VERSION%.' | interpolate }}
-</p> 
+<div class="page-header">
+  <h1>Dashboard</h1>
+</div>
 
 <div class="container-fluid"  ng-app="myApp.dashboard"   ng-controller="dashboardCtrl" >  
     <br>
-    <div class="row"   >
-	     <div class="col-sm-6 "  id="id1">
+    <div class="row"  >
+    	 <div class="col-sm-3"  id="topPerTeam">
+	     	<div class="well"   align="center" style="background-color: #1E88E5;box-shadow: 10px 10px 5px #888888;">
+	     	    <font size="6"  color="white">Team 1</font>
+	     	    <br>
+	     		<font size="2" color="white">Top Performing Team: 790</font> 	    		
+	     	</div>
+	     	<div class="well" align="center"  style="background-color: #FFC107 ;box-shadow: 10px 10px 5px #888888;">
+	     		<font size="8" color="white">27</font> 
+	    			<br>    		
+	    		 <font size="2" color="white">Sprint Completed</font>
+	    		 	<br>	    		 	
+	    		 	<br>
+	    		 <font color="white"  size="2">Total Points # Expected:170 , Earned: 180</font>
+	     	</div>
+	     </div>
+	     
+	     <div class="col-sm-9"  id="id1">
 	     	<div class="well" style="box-shadow: 10px 10px 5px #888888;">
-	     		<h4>Performance Of The Teams</h4>      
+	     		<h4>Team Performance</h4>      
 	    		<nvd3-line-chart
 					data="exampleDataperf"
     				id="peroftheteam"    
@@ -17,10 +31,28 @@
     				showYAxis="true"
 	        		useInteractiveGuideLine="true"
 	        		showLegend="true" 
-	        		tooltips="true"
-    				>
-       				 <svg height="300"></svg>
+	        		tooltips="true">
+       				 <svg height="220"></svg>
 				</nvd3-line-chart>
+	     	</div>
+	     </div>
+	</div>
+	<div class="row" >
+		<div class="col-sm-2 "  id="goaltab" >
+	     	<div class="well" align="center" style="background-color: #AB47BC;box-shadow: 10px 10px 5px #888888;height:280px" >
+	     		<font  color="white"  size="4">Delivery</font>   
+	     		<br>
+	     		<font  color="white"  size="2">Expected:2360, Actual:2360</font> 
+	     		<br>
+	     		<br>
+	     		<font  color="white"  size="4">Quality</font>	     		
+	     		<br>
+	     		<font  color="white"  size="2">Expected:1533, Actual:1576</font> 
+	     		<br>  
+	     		<br>
+	     		<font  color="white"  size="4">Innovation</font>	     		
+	     		<br>
+	     		<font  color="white"  size="2">Expected:234, Actual:670</font> 
 	     	</div>
 	     </div>
 	      <div class="col-sm-6 "  id="id2" >
@@ -35,15 +67,31 @@
 	        		interactive="true"
 	        		showLegend="true" 
 	        		tooltips="true">
-	        			<svg  height="300"></svg>
+	        			<svg  height="200"></svg>
 	    		</nvd3-multi-bar-chart>
 	     	</div>
 	     </div>
-	</div>  
-	<div class="row">	
-		<div class="col-sm-3"  id="id3" >
+	     
+	     <div class="col-sm-2 "  id="topdeliveryTeam" >
+	     	<div class="well"   align="center" style="background-color: #1E88E5;box-shadow: 10px 10px 5px #888888;height:80px">
+	     	    <font size="4"  color="white">Team 3</font>
+	     	    <br>
+	     		<font size="2" color="white">Most On Time Team: 790</font> 	    		
+	     	</div>
+	     	<div class="well"   align="center" style="background-color: #1E88E5;box-shadow: 10px 10px 5px #888888;height:80px">
+	     	    <font size="4"  color="white">Team 1</font>
+	     	    <br>
+	     		<font size="2" color="white">Top In Quality: 992</font> 	    		
+	     	</div>
+	     	<div class="well"   align="center" style="background-color: #1E88E5;box-shadow: 10px 10px 5px #888888;height:80px">
+	     	    <font size="4"  color="white">Team 1</font>
+	     	    <br>
+	     		<font size="2" color="white">Top Innovating Team: 900</font> 	    		
+	     	</div>
+	     </div>
+	     <div class="col-sm-2"  id="id3" >
 			<div class="well" style="box-shadow: 10px 10px 5px #888888;">
-				<h4>Team Innovation Contributon</h4>
+				<h4>Team Innovation</h4>
 				<nvd3-pie-chart 
       				data="exampleData2" 
       				id="exampleId"     
@@ -55,8 +103,28 @@
       				showLabels="false" 
       				showLegend="true" 
       				tooltips="true">		
-      				<svg width="300" height="300" ></svg>
+      				<svg height="200" ></svg>
       			</nvd3-pie-chart >
+			</div>			
+		</div>
+	</div>  
+	<div class="row">	
+		<div class="col-sm-3"  id="topteammem" >
+			<div class="well" align="center"style="background-color: #FFC107 ;box-shadow: 10px 10px 5px #888888;height:280px">
+				 <font size="6" color="white">1324</font> 
+	    			<br>    		
+	    		 <font size="2" color="white">Team Member One</font>
+	    		 	<br>	    		 	
+	    		 	<br>
+	    		 <font size="6" color="white">1100</font> 
+	    			<br>    		
+	    		 <font size="2" color="white">Team Member Two</font>	
+	    		 <br>	    		 	
+	    		 <br>
+				<font size="6" color="white">980</font> 
+	    			<br>    		
+	    		 <font size="2" color="white">Team Member Tree</font>	
+	    		 
 			</div>			
 		</div>
 		<div class="col-sm-9"  id="id4">
@@ -70,12 +138,59 @@
 	        		interactive="true"
 	        		showLegend="true"	        		
 	        		tooltips="true">
-	        			<svg  height="300"></svg>
+	        			<svg  height="200"></svg>
 	    		</nvd3-multi-bar-chart>
 	     		</div>
 	     	</div>
 	</div>
+	<div class="row" >
+	      <div class="col-sm-8"  id="sprintfeedback" >
+	     	<div class="well" style="box-shadow: 10px 10px 5px #888888;">
+	     		<h4>Sprint Feedback</h4>      
+	    		<nvd3-multi-bar-chart
+	    			data="sprintFeedbackdata"
+	        		id="sprintfeedback"	        			        		
+	        		showXAxis="true"
+	        		xAxisTickFormat="xAxissprintfeedbackFormat()"
+	        		showYAxis="true"
+	        		interactive="true"
+	        		showLegend="true" 
+	        		tooltips="true">
+	        			<svg  height="200"></svg>
+	    		</nvd3-multi-bar-chart>
+	     	</div>
+	     </div>
+	     <div class="col-sm-2 "  id="topdeliveryTeam1" >
+	     	<div class="well"   align="center" style="background-color: #1E88E5;box-shadow: 10px 10px 5px #888888;height:80px">
+	     	    <font size="4"  color="white">Team 3</font>
+	     	    <br>
+	     		<font size="2" color="white">Top in Criteria1: 210</font> 	    		
+	     	</div>
+	     	<div class="well"   align="center" style="background-color: #1E88E5;box-shadow: 10px 10px 5px #888888;height:80px">
+	     	    <font size="4"  color="white">Team 1</font>
+	     	    <br>
+	     		<font size="2" color="white">Top in Criteria2: 992</font> 	    		
+	     	</div>
+	     	<div class="well"   align="center" style="background-color: #1E88E5;box-shadow: 10px 10px 5px #888888;height:80px">
+	     	    <font size="4"  color="white">Team 1</font>
+	     	    <br>
+	     		<font size="2" color="white">Top in Criteria3: 900</font> 	    		
+	     	</div>
+	     </div>
+	     <div class="col-sm-2 "  id="topdeliveryTeam2" >
+	     	<div class="well"   align="center" style="background-color: #1E88E5;box-shadow: 10px 10px 5px #888888;height:80px">
+	     	    <font size="4"  color="white">Team 3</font>
+	     	    <br>
+	     		<font size="2" color="white">Top in Criteria4: 790</font> 	    		
+	     	</div>
+	     	<div class="well"   align="center" style="background-color: #1E88E5;box-shadow: 10px 10px 5px #888888;height:80px">
+	     	    <font size="4"  color="white">Team 1</font>
+	     	    <br>
+	     		<font size="2" color="white">Top in Criteria5: 992</font> 	    		
+	     	</div>	     	
+	     </div>
 
+	</div>
 </div>   
   
 

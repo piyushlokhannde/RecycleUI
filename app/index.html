@@ -15,13 +15,30 @@
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <body>
-  <ul class="menu">
+      <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">Sprinter</a>
+          </div>
+          <ul class="nav navbar-nav">            
+            <li><a href="#!/sprint">Sprint</a></li>
+            <li><a href="#!/dashboard">Dashboard</a></li>
+            <li><a href="#!/voting">Voting</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        </ul>
+        </div>
+      </nav>
+
+  <!--<ul class="menu">
     <li><a href="#!/view1">view1</a></li>
     <li><a href="#!/view2">view2</a></li>
     <li><a href="#!/sprint">sprint</a></li>
     <li><a href="#!/dashboard">dashboard</a></li>
      <li><a href="#!/voting">voting</a></li>
-  </ul>
+  </ul>-->
 
   <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -50,8 +67,8 @@
 <script src="bower_components/nvd3/nv.d3.js"></script>
 <script src="bower_components/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.js"></script>
 <link rel="stylesheet" href="bower_components/nvd3/nv.d3.css"/>
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

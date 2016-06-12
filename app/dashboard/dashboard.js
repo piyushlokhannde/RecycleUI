@@ -71,19 +71,19 @@ dashboardapp.controller('dashboardCtrl', function($scope) {
              $scope.exampleDataperf = [
                  {
                     "key": "TeamFour",
-                     "values": [  [ 1 , 10] ,[ 2 , 20], [ 3, 30]]
+                     "values": [  [ 1 , 1] ,[ 2 , 3], [ 3, 21]]
                  },
                  {
                      "key": "TeamTwo ",
-                     "values": [ [ 1 , 11] , [ 2 , 19]  , [ 3 , 27]]
+                     "values": [ [ 1 , 11] , [ 2 , 4]  , [ 3 ,5]]
                  },
                  {
                      "key": "TeamThree ",
-                     "values": [  [ 1 , 12],[ 2 , 24],[ 3 , 36] ]
+                     "values": [  [ 1 , 1],[ 2 , 5],[ 3 , 6] ]
                 },
                  {
                      "key": "TeamOne",
-                     "values": [  [ 1 , 12],[ 2 , 20],[ 3 , 31]]
+                     "values": [  [ 1 , 1],[ 2 , 6],[ 3 , 7]]
                  }
              ];
 
@@ -135,6 +135,51 @@ dashboardapp.controller('dashboardCtrl', function($scope) {
                      "values": [  [ 0 , 110]]
                  }
              ];
+
+              $scope.sprintFeedbackdata = [
+                 {
+                    "key": "TeamFour",
+                     "values": [  [ 1 , 1] ,[ 2 , 3], [ 3, 9], [ 4, 6], [ 5, 10]]
+                 },
+                 {
+                     "key": "TeamTwo ",
+                     "values": [ [ 1 , 4] ,[ 2 , 5], [ 3, 3], [ 4, 5], [ 5, 12]]
+                 },
+                 {
+                     "key": "TeamThree ",
+                     "values": [   [ 1 , 2] ,[ 2 , 9], [ 3, 5], [ 4, 4], [ 5, 11]]
+                },
+                 {
+                     "key": "TeamOne",
+                     "values": [   [ 1 , 6] ,[ 2 , 9], [ 3, 7], [ 4, 1], [ 5, 14]]
+                 }
+             ];
+
+              $scope.xAxissprintfeedbackFormat  = function() {
+
+                return function (d) {              
+                switch (d) {
+                    case 1:
+                        return "Criteria1";
+                        break;
+                    case 2:
+                        return "Criteria2";
+                        break;
+
+                    case 3:
+                        return "Criteria3";
+                        break;
+                     case 4:
+                        return "Criteria4";
+                        break;
+                     case 5:
+                        return "Criteria5";
+                        break;
+                     
+
+                }
+            }
+            };
 
 
 });
