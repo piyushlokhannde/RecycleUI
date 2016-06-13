@@ -4,12 +4,53 @@
   {{ 'Current version is v%VERSION%.' | interpolate }}
 </p>
 <div ng-app="myApp.voting" >
-ID: <input type="text" ng-model="TeamMember.ID"><br>
-First Name: <input type="text" ng-model="TeamMember.firstName"><br>
-Last Name:  <input type="text" ng-model="TeamMember.lastName"><br>
-Email:      <input type="text" ng-model="TeamMember.email"><br>
-Team Name:  <input type="text" ng-model="TeamMember.teamname"><br>
+<div ng-app="myApp.voting" back-img="images/voting.png" ng-init="teamList=[
+{name:'', lastname:''},
+{name:'test1', lastname:'test1'},
+{name:'test2', lastname:'test2'},
+{name:'test3', lastname:'test3'}]" style="background-image: url('images/voting.png')">
 
+<div back-img="images/voting.png" > </div>
+
+<div class="jumbotron" >
+  <div class="container text-center">
+		<table class="table table-condensed table-striped" align="center" style="align-self: center; width:50%" title="Team Performer"> 
+		<tr>
+			<td><label>Select the Team Performer</label></td>
+			<td>
+			  <select  class="form-control" ng-model="selectedPerformer" ng-options="member.name for member in teamList">
+			    <!-- <option ng-repeat="member in teamList"> -->
+			    
+			  </select>
+			  </td>
+		</tr>
+		</table>
+		<h3 align="center"> 
+		Please answers few question about Team Work within your team</h3>
+		<table table table-condensed table-striped" align="center" border="2" style="align-self: center; width:50%">
+		<thead><tr><td align="center"><h4><b>Questions</h4></td><td  align="center"><h4>Rating</b></h4></td></td></tr></thead>
+		<tr><td>
+Work assignments was distributed fairly.
+</td><td>
+Slider Here
+
+</td></tr><tr><td>
+Sufficient effort is made to get the opinions and ideas of Team members. 
+</td><td>
+Slider Here
+</td></tr><tr><td>
+Team members are held accountable for the decisions they make.
+</td><td>
+Slider Here
+
+</td></tr><tr><td>
+communication within the team
+</td><td>Slider Here</td></tr><tr><td>
+The team takes collective responsibility for completing group assignments.
+</td><td>Slider Here</td></tr><tr><td>
+Overall, how satisfied are you with the spirit of teamwork within your Team?	
+</td><td>Slider Here</td>
+</table>
 <uib-rating ng-model="rate" max="max" read-only="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['one','two','three']" aria-labelledby="default-rating"></uib-rating>
 <span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>
 <button ng-click="saveMember()">save member</button>
