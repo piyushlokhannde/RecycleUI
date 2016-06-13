@@ -1,212 +1,38 @@
-<div class="page-header">
-  <h1>&nbsp&nbspSprint</h1>
+<div  style="background-color:#DB7093;font-family: serif;padding:10px 5px 15px 20px;" align="center" >
+  <font  size="8" color="white">Sprint</font>
 </div>
-<div  class="container" ng-app="myApp.sprint" >
-<style type="text/css">
-table {
-    border-collapse: collapse;
-    vertical-align: center;
-	
+<div  class="container" ng-app="myApp.sprint" align="center" >
+<br>
+<div style="width:90%">
 
-}
-
-table, td, th {
-    border: 1px solid black;
-    vertical-align: center;
-	
-}
-
- .panel-group, 
- .panel-group .panel, 
- .panel-group .panel-heading,
- .panel-group .panel-heading a,  
- .panel-group .panel-title,  
- .panel-group .panel-title a,  
- .panel-group .panel-body,
- .panel-group .panel-group .panel-heading + .panel-collapse > .panel-body  {
-    border-radius:2px;
-    border:0;
-}
-.panel-group .panel-heading + .panel-collapse > .panel-body {
-  border-top: 0;
-}
-
-
- .panel-group .panel-heading {
-    padding: 0;
-}
- .panel-group .panel-heading a {
-    display: block;
-    background: #668bb1;
-    color:#fff;
-    padding:15px;
-     text-decoration:none;
-   position: relative;
-}
- .panel-group .panel-heading a.collapsed {
-    background: #c4ced5; 
-    color:inherit;
-}
-
- .panel-group .panel-heading a:after {
-    content: '-';
-    position: absolute;
-    right: 20px;
-}
- .panel-group .panel-heading a.collapsed:after {
-    content: '+';
-}
- .panel-group .panel-collapse {
-    margin-top:5px!important;
-}
- .panel-group .panel-body  {
-    background: #f7f7f7;
-    padding:15px;
-}
- .panel-group .panel {
-  background-color: transparent;
-}
-
-.panel-group .panel-body p:last-child,
-.panel-group .panel-body  ul:last-child,
-.panel-group .panel-body  ol:last-child {
-  margin-bottom: 0;
-}
-
-</style>
-<table class="table table-condensed table-striped" border="2" style="width:80% ">
-	<thead></thead>
-	<tr>
-		<td>
-			<div class="well">Sprint
-
-			<table border="1" align="right" style="vertical-align:top" > <tr><td align="right">
-
-				<button type="button" class="btn btn-default" style="align:right">Cancel</button>
-				<!-- <button type="button" class="btn btn-primary">Primary</button> -->
-				<button type="button" class="btn btn-success">Save</button>
-				<!-- <button type="button" class="btn btn-info">Info</button>
-				<button type="button" class="btn btn-warning">Warning</button>
-				<button type="button" class="btn btn-danger">Danger</button>
-				<button type="button" class="btn btn-link">Link</button> -->
-				</td>
-				</tr></table>
-			</div>
-		</td>
-	</tr> 
-	<tr><td>
-		
-	<div class="panel-group" id="accordion">
-  <div class="panel panel-default" >
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <!-- <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"> -->
-        <table style="width:100%"><tr><td style="width:95%">Sprint Details</td><td>
-        <button  class="btn btn-default" data-toggle="collapse" data-parent="#accordion" data-target="#collapse1">  +  </button></td></tr></table>
-      </h4>
-    </div>
-    <div id="collapse1" class="panel-collapse collapse in">
-      <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-      minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat.</div>
-    </div>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-<!--         <a data-toggle="collapse" data-parent="#accordion" href="#collapse2"> -->
-        <table style="width:100%"><tr><td style="width:95%">Team Details</td><td>
-        <button  class="btn btn-default" data-toggle="collapse" data-parent="#accordion" data-target="#collapse2">  +  </button></td></tr></table>
-      </h4>
-    </div>
-    <div id="collapse2" class="panel-collapse collapse">
-      <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-      minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat.</div>
-    </div>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <table style="width:100%"><tr><td style="width:95%">Goals</td><td>
-        <button  class="btn btn-default" data-toggle="collapse" data-parent="#accordion" data-target="#collapse3">  +  </button></td></tr></table>
-      </h4>
-    </div>
-    <div id="collapse3" class="panel-collapse collapse">
-      <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-      minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat.</div>
-    </div>
-  </div>
+<div class="btn-group" >
+  <label class="btn btn-success  btn-lg" ng-model="checkModel.left" uib-btn-checkbox>Save Sprint</label>
+  <label class="btn btn-success btn-lg" ng-model="checkModel.middle" uib-btn-checkbox>Start Sprint</label>
+  <label class="btn btn-success btn-lg" ng-model="checkModel.right" uib-btn-checkbox>End Sprint</label>
+  <label class="btn btn-success btn-lg" ng-model="checkModel.right" uib-btn-checkbox>Commit Sprint</label>
 </div>
 
-	</td>
-	</tr>
-	<tr><td>
-		
-<div class="container">
+<br>
+<br>
+<uib-accordion close-others="true">
 
-         <div class="panel-group" id="accordion">
+<uib-accordion-group heading="Sprint Details" panel-class="panel-danger">
 
-            <div class="panel panel-default">
-               <div class="panel-heading">
-                  <h4 class="panel-title">
-                     <button data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne">
-                     Collapsible Group Item #1
-                     </button> 
-                     <button> test </button>
-                  </h4>
-               </div><!--/.panel-heading -->
-               <div id="collapseOne" class="panel-collapse collapse in">
-                  <div class="panel-body">
-                     Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                  </div><!--/.panel-body -->
-               </div><!--/.panel-collapse -->
-            </div><!-- /.panel -->
+    </uib-accordion-group>
+<br>
+<uib-accordion-group heading="Team Details" panel-class="panel-danger">
+      <p>Please, to delete your account, click the button below</p>
+      <button class="btn btn-danger">Delete</button>
+    </uib-accordion-group>
 
-            <div class="panel panel-default">
-               <div class="panel-heading">
-                  <h4 class="panel-title">
-                     <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                     Collapsible Group Item #2
-                     </a>
-                  </h4>
-               </div><!--/.panel-heading -->
-               <div id="collapseTwo" class="panel-collapse collapse">
-                  <div class="panel-body">
-                     Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                  </div><!--/.panel-body -->
-               </div><!--/.panel-collapse -->
-            </div><!-- /.panel -->
+<br>
+    <uib-accordion-group heading="Goal Details" panel-class="panel-danger">
+      <p>Please, to delete your account, click the button below</p>
+      <button class="btn btn-danger">Delete</button>
+    </uib-accordion-group>
+</uib-accordion>
 
-            <div class="panel panel-default">
-               <div class="panel-heading">
-                  <h4 class="panel-title">
-                     <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                     Collapsible Group Item #3
-                     </a>
-                  </h4>
-               </div><!--/.panel-heading -->
-               <div id="collapseThree" class="panel-collapse collapse">
-                  <div class="panel-body">
-                     Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                  </div><!--/.panel-body -->
-               </div><!--/.panel-collapse -->
-            </div><!-- /.panel -->
-         </div><!-- /.panel-group -->
+<div>
 
-</div><!-- /.container -->  
-
-	</td></tr>
-	<tbody>
-		<tr></tr>
-		<tr></tr>
-		<tr></tr>
-	</tbody>
-
-</table>
 
 </div>

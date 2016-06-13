@@ -20,8 +20,13 @@
           <div class="navbar-header">
             <a class="navbar-brand" href="#">Sprinter</a>
           </div>
-          <ul class="nav navbar-nav">            
-            <li><a href="#!/sprint">Sprint</a></li>
+          <ul class="nav navbar-nav"> 
+            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Sprint <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#!/sprint">Create</a></li>
+                <li><a href="#">Update</a></li>                
+              </ul>
+            </li>           
             <li><a href="#!/dashboard">Dashboard</a></li>
             <li><a href="#!/voting">Voting</a></li>
         </ul>
@@ -45,8 +50,9 @@
   <![endif]-->
 
   <div ng-view></div>
-
-  <div>Angular seed app: v<span app-version></span></div>
+  <br>
+  <br>
+  <div style="background-color:#DB7093;font-family: serif;" align="center"><font  size="2" color="white">Sprinter app: v<span app-version></span></font></div>
 
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
