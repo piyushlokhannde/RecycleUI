@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.voting', ['ngRoute', 'ngResource'])
+angular.module('myApp.voting', ['ngRoute', 'ngResource', 'ui.bootstrap'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/voting', {
@@ -14,7 +14,20 @@ angular.module('myApp.voting', ['ngRoute', 'ngResource'])
 })
 
 .controller('votingCtrl', function($scope , MemberService) {
+
+
+ $scope.rate = 0;
+  $scope.max = 10;
+  $scope.isReadonly = false;
+
+$scope.hoveringOver = function(value) {
+    $scope.overStar = value;
+    $scope.percent = 100 * (value / $scope.max);
+  };
+
+
     $scope.saveMember = function() {  	
+
 
     	MemberService.save(angular.toJson($scope.TeamMember),
 

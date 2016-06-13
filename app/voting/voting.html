@@ -9,6 +9,9 @@ First Name: <input type="text" ng-model="TeamMember.firstName"><br>
 Last Name:  <input type="text" ng-model="TeamMember.lastName"><br>
 Email:      <input type="text" ng-model="TeamMember.email"><br>
 Team Name:  <input type="text" ng-model="TeamMember.teamname"><br>
+
+<uib-rating ng-model="rate" max="max" read-only="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['one','two','three']" aria-labelledby="default-rating"></uib-rating>
+<span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>
 <button ng-click="saveMember()">save member</button>
 <button ng-click="getMember()">get member</button>
 </div>
