@@ -1,14 +1,63 @@
 <div style="background-color:#DB7093;font-family: serif;" align="center" >
   <font  size="8" color="white">Voting</font>
 </div>
-<div ng-app="myApp.voting" >
+<div ng-app="myApp.voting" class="container" align="center" >
+
+<br>
+<div style="width:50%">
+
+
+<div class="btn-group" >
+<label class="btn btn-success  btn-lg" ng-model="checkModel.left" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Cancel Changes Sprint">Cancel</label>
+ <label class="btn btn-success  btn-lg" ng-model="checkModel.left" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Submit Vote">Submit</label> 
+</div>
+</div>
+
+<br>
+<br>
+
+<uib-accordion close-others="true">
+
+
+<uib-accordion-group heading="Vote Members" panel-class="panel-primary">
+      <p>Please, to delete your account, click the button below</p>
+      <button class="btn btn-danger">Delete</button>
+    </uib-accordion-group>
+
+    <uib-accordion-group heading="Sprint Feedback" panel-class="panel-primary">
+     	<p><h3>Please answers few question about Team Work within your team</h3></p>
+     	<div class="well">
+     		<div class="row"  >
+     			<div class="col-sm-8"  align="right" >
+     			<font size="4">assignments was distributed fairly.</font>
+     			</div>
+     			<div class="col-sm-4"  align="center">
+     			<uib-rating ng-model="rate" max="max" read-only="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['one','two','three']" aria-labelledby="default-rating"></uib-rating>
+<span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>
+     			</div>
+     		</div>
+       	</div>
+        <div class="well">Normal Well</div>
+         <div class="well">Normal Well</div>
+          <div class="well">Normal Well</div>
+           <div class="well">Normal Well</div>
+           <div class="well">Normal Well</div>
+
+     
+    </uib-accordion-group>
+</uib-accordion>
+
+<div>
+
+</div>
+
 <div ng-app="myApp.voting"  ng-init="teamList=[
 {name:'', lastname:''},
 {name:'test1', lastname:'test1'},
 {name:'test2', lastname:'test2'},
 {name:'test3', lastname:'test3'}]" style="background-image: url('images/voting.png')">
 
-<div back-img="images/voting.png" > </div>
+
 
 <div class="jumbotron" >
   <div class="container text-center">
