@@ -3,30 +3,31 @@
 </div>
 <div  class="container" ng-app="myApp.sprint" align="center" >
 <br>
-<div style="width:90%">
+<div style="width:70%">
 
 <div class="btn-group" >
-  <label class="btn btn-success  btn-lg" ng-model="checkModel.left" uib-btn-checkbox>Save Sprint</label>
-  <label class="btn btn-success btn-lg" ng-model="checkModel.middle" uib-btn-checkbox>Start Sprint</label>
-  <label class="btn btn-success btn-lg" ng-model="checkModel.right" uib-btn-checkbox>End Sprint</label>
-  <label class="btn btn-success btn-lg" ng-model="checkModel.right" uib-btn-checkbox>Commit Sprint</label>
+<label class="btn btn-success  btn-lg" ng-model="checkModel.left" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Delete Sprint">Delete</label>
+ <label class="btn btn-success  btn-lg" ng-model="checkModel.left" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Cancel Changes">Cancel</label>
+  <label class="btn btn-success  btn-lg" ng-model="checkModel.left" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Save Sprint Data">Save </label>
+  <label class="btn btn-success btn-lg" ng-model="checkModel.middle" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Start Sprint">Start</label>
+  <label class="btn btn-success btn-lg" ng-model="checkModel.right" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="End Sprint">End</label>
+  <label class="btn btn-success btn-lg" ng-model="checkModel.right" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Commit Sprint">Commit </label>
 </div>
 
 <br>
 <br>
 <uib-accordion close-others="true">
 
-<uib-accordion-group heading="Sprint Details" panel-class="panel-danger">
+<uib-accordion-group heading="Sprint Details" panel-class="panel-primary">
 
     </uib-accordion-group>
-<br>
-<uib-accordion-group heading="Team Details" panel-class="panel-danger">
+
+<uib-accordion-group heading="Team Details" panel-class="panel-primary">
       <p>Please, to delete your account, click the button below</p>
       <button class="btn btn-danger">Delete</button>
     </uib-accordion-group>
 
-<br>
-    <uib-accordion-group heading="Goal Details" panel-class="panel-danger">
+    <uib-accordion-group heading="Goal Details" panel-class="panel-primary">
       <p>Please, to delete your account, click the button below</p>
       <button class="btn btn-danger">Delete</button>
     </uib-accordion-group>
