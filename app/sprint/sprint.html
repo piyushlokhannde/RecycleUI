@@ -1,38 +1,55 @@
 <div  style="background-color:#DB7093;font-family: serif;padding:10px 5px 15px 20px;" align="center" >
   <font  size="8" color="white">Sprint</font>
 </div>
-<div  class="container" ng-app="myApp.sprint" align="center" >
+<div   ng-app="myApp.sprint" align="center" >
 <br>
-<div style="width:70%">
+<div style="width:70%" >
 
-<div class="btn-group" >
-<label class="btn btn-success  btn-lg" ng-model="checkModel.left" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Delete Sprint">Delete</label>
- <label class="btn btn-success  btn-lg" ng-model="checkModel.left" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Cancel Changes">Cancel</label>
-  <label class="btn btn-success  btn-lg" ng-model="checkModel.left" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Save Sprint Data">Save </label>
-  <label class="btn btn-success btn-lg" ng-model="checkModel.middle" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Start Sprint">Start</label>
-  <label class="btn btn-success btn-lg" ng-model="checkModel.right" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="End Sprint">End</label>
-  <label class="btn btn-success btn-lg" ng-model="checkModel.right" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Commit Sprint">Commit </label>
-</div>
+
+<button class="btn btn-success  btn-lg" ng-model="checkModel.left" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Delete Sprint">Delete</button>
+ <button class="btn btn-success  btn-lg" ng-model="checkModel.left" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Cancel Changes">Cancel</button>
+  <button class="btn btn-success  btn-lg" ng-model="checkModel.left" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Save Sprint Data">Save </button>
+  <button class="btn btn-success btn-lg" ng-model="checkModel.middle" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Start Sprint">Start</button>
+  <button class="btn btn-success btn-lg" ng-model="checkModel.right" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="End Sprint">End</button>
+  <button class="btn btn-success btn-lg" ng-model="checkModel.right" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Commit Sprint">Commit </button>
+
 
 <br>
 <br>
-<uib-accordion close-others="true">
+<div id="paneldiv"  style="width:100%"  align="left">
+<uib-accordion close-others="true" id="parent"  >
+  <uib-accordion-group heading="Sprint Details" panel-class="panel-primary " is-open="true">
 
-<uib-accordion-group heading="Sprint Details" panel-class="panel-primary">
+  </uib-accordion-group>
 
-    </uib-accordion-group>
+  <uib-accordion-group heading="Team Details" panel-class="panel-primary">
+    <p>Please, to delete your account, click the button below</p>
+    <button class="btn btn-danger">Delete</button>
+  </uib-accordion-group>
 
-<uib-accordion-group heading="Team Details" panel-class="panel-primary">
-      <p>Please, to delete your account, click the button below</p>
-      <button class="btn btn-danger">Delete</button>
-    </uib-accordion-group>
+  <uib-accordion-group heading="Goal Details" panel-class="panel-primary" >   
+    <button class="btn btn-danger btn-sm" ng-click="addGoal()"  ng-model="checkModel.right" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Add Goal">Add Goal</button>
+    <button class="btn btn-danger btn-sm"  ng-click="removeGoal()" ng-model="checkModel.right" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Delete Goal">Remove Goal</button>
+    
+    <br>   
+    <br>  
+    <uib-accordion close-others="true"  id="goalsparent">
+      <uib-accordion-group  id ="{{goal.name}}" ng-click="setgroup($index)" ng-repeat="goal in goals" heading="{{goal.name}}" panel-class="panel-danger">   
+           <uib-accordion close-others="true"  id="{{goal.name}}_parameters">            
+              <button class="btn btn-info btn-sm"  ng-model="checkModel.right" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Add Parameter">Add Parameter</button>
+              <button class="btn btn-info btn-sm" ng-model="checkModel.right" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Remove Parameter">Remove Parameter</button>           
+            <br>   
+            <br>    
+            <uib-accordion-group  ng-repeat="parameter in goal.parameters"   id ="{{parameter.name}}" heading="{{parameter.name}}" panel-class="panel-info">
+             </uib-accordion-group>
+          </uib-accordion> 
 
-    <uib-accordion-group heading="Goal Details" panel-class="panel-primary">
-      <p>Please, to delete your account, click the button below</p>
-      <button class="btn btn-danger">Delete</button>
-    </uib-accordion-group>
+      </uib-accordion-group>
+
+    </uib-accordion>        
+  </uib-accordion-group>
 </uib-accordion>
-
+</div>
 <div>
 
 
