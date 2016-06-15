@@ -1,8 +1,11 @@
-<div  style="background-color:#DB7093;font-family: serif;padding:10px 5px 15px 20px;" align="center" >
+<div  style="background-color:#DB7093;font-family: serif;" align="center" >
   <font  size="8" color="white">Sprint</font>
 </div>
 <div   ng-app="myApp.sprint" align="center" >
 <br>
+
+
+
 <div style="width:70%" >
 
 
@@ -35,12 +38,24 @@
     <br>  
     <uib-accordion close-others="true"  id="goalsparent">
       <uib-accordion-group  id ="{{goal.name}}" ng-click="setgroup($index)" ng-repeat="goal in goals" heading="{{goal.name}}" panel-class="panel-danger">   
-           <uib-accordion close-others="true"  id="{{goal.name}}_parameters">            
-              <button class="btn btn-info btn-sm"  ng-model="checkModel.right" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Add Parameter">Add Parameter</button>
-              <button class="btn btn-info btn-sm" ng-model="checkModel.right" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Remove Parameter">Remove Parameter</button>           
+           <uib-accordion close-others="true"  id="{{goal.name}}_parameters">
+           <div class="form-group"> 
+           <div class="col-sm-4">           
+              <button class="btn btn-info btn-sm" ng-click="addParam()" ng-model="checkModel.right" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Add Parameter">Add Parameter</button>
+              <button class="btn btn-info btn-sm"  ng-click="removeParam()" ng-model="checkModel.right" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Remove Parameter">Remove Parameter</button> 
+            </div>  
+            
+           
+           
+            <div class="col-sm-8" align="right"> 
+             <label for="inputWarning">Goal Percentage:</label>
+               <input type="text" class="input-sm" id="inputWarning" maxlength="3" size="3"  disabled="true"> % 
+            </div>   
+
+            </div>         
             <br>   
             <br>    
-            <uib-accordion-group  ng-repeat="parameter in goal.parameters"   id ="{{parameter.name}}" heading="{{parameter.name}}" panel-class="panel-info">
+            <uib-accordion-group  ng-click="setparameter($parent.$index, $index)" ng-repeat="parameter in goal.parameters"   id ="{{parameter.name}}" heading="{{parameter.name}}" panel-class="panel-info">
              </uib-accordion-group>
           </uib-accordion> 
 
