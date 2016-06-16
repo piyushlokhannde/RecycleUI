@@ -1,47 +1,136 @@
 <div style="background-color:#DB7093;font-family: serif;" align="center" >
   <font  size="8" color="white">Voting</font>
-</div>
-<div ng-app="myApp.voting" class="container" align="center" >
+</div> <!-- getVotingQues($scope, $http); -->
+<div ng-app="myApp.voting" class="container" align="center" ng-init="getSprintDetails('1');getTeamList('1')">
+<!-- teamList=[
+{name:'', lastname:'',isSelected:''},
+{name:'Taufique', lastname:'Taufique', isSelected:'false'},
+{name:'Piyush', lastname:'Piyush', isSelected:''},
+{name:'Manjit', lastname:'Manjit', isSelected:''},
+{name:'Vinod', lastname:'Vinod', isSelected:''}]"> --> <!--
+
+
+
+qlist=[{id: '1',que:'Work assignments was distributed fairly.',rating:''},
+{id: '2',que:'Sufficient effort is made to get the opinions and ideas of Team members.',rating:''},
+{id: '3',que:'Team members are held accountable for the decisions they make.',rating:''},
+{id: '4',que:'The team takes collective responsibility for completing group assignments.',rating:''},
+{id: '5',que:'Overall, how satisfied are you with the spirit of teamwork within your Team?',rating:''}]; 
+percent = [qlist.length]" > -->
+ <!-- style="background-image: url('images/voting.png')"> -->
+
+<style type="text/css">
+.glyphicon.glyphicon-star{
+    font-size: 30px;
+}
+.glyphicon.glyphicon-star-empty{
+    font-size: 30px;
+}	
+.top-buffer { margin-top:20px; }
+	
+</style>
 
 <br>
-<div style="width:50%">
+<div style="width:50%; align:center">
 
 
-<div class="btn-group" >
-<label class="btn btn-success  btn-lg" ng-model="checkModel.left" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Cancel Changes Sprint">Cancel</label>
- <label class="btn btn-success  btn-lg" ng-model="checkModel.left" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Submit Vote">Submit</label> 
-</div>
+
+<button class="btn btn-success  btn-lg" ng-model="checkModel.left" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Cancel Changes Sprint" ng-click= go('!/voting') >Cancel</button>
+ <button class="btn btn-success  btn-lg" ng-model="checkModel.left" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Submit Vote" ng-click="submitVoting()"> Submit </button>
+
 </div>
 
 <br>
 <br>
 
-<uib-accordion close-others="true">
+<uib-accordion close-others="true" style='align:center'>
 
 
-<uib-accordion-group heading="Vote Members" panel-class="panel-primary">
-      <p>Please, to delete your account, click the button below</p>
-      <button class="btn btn-danger">Delete</button>
+<uib-accordion-group heading="Vote Members" style="width:70%" panel-class="panel-primary" >
+	
+<small><em>No animation</em></small>
+    <uib-progressbar animate="false" value="dynamic" type="success"><b>{{dynamic}}%</b></uib-progressbar>
+    
+	<div ng-repeat="x in getArray(teamList.length) track by $index">
+
+
+	<!-- <div class="row top-buffer"> -->
+	<!-- ------------------ -->
+	<!--   <div class="form-group "> 
+                  <div class="col-sm-10 well well-sm" > 
+                    <span class="label" for="teamListSelect_$index">Please select the Team Performer</span>
+                    <select  id="teamListSelect_$index" class="form-control" ng-model="member.name" ng-change="memberChanged(member)" style="width: 30%;"
+      ng-options="member.empName for member in teamList ">
+      </select>
+                  
+                </div>  
+</div> -->
+	<!-- ------------------------ -->
+
+
+<div class="row"> 
+
+	
+	<div class="col-sm-6 " style="align:right" >
+	<label for="teamListSelect_$index">Please select the Team Performer</label>
+     </div>
+      
+      
+
+      <!-- <select  class="form-control" ng-model="member.name" ng-change="memberChanged(member)" 
+      ng-options="member.name for member in ( teamList | filter : {isSelected:'false'} )">
+      </select>  -->
+      <div class="col-sm-5 "  align="center" >
+      <select  id="teamListSelect_$index" class="form-control" ng-model="member.name" ng-change="memberChanged(member)"
+      ng-options="member.empName for member in teamList " style="width:50%;align:left">
+      </select>
+      </div>
+      </div>
+      <!-- </div> -->
+       <!-- <div ng-repeat = "mem in teamList | filter: {isSelected:'true'}">
+                  SElected - > {{mem}}
+      </div>   -->
+
+      
+      
+      <!-- </div> -->
+ 	</div>
     </uib-accordion-group>
 
-    <uib-accordion-group heading="Sprint Feedback" panel-class="panel-primary">
-     	<p><h3>Please answers few question about Team Work within your team</h3></p>
-     	<div class="well well-sm">
+
+    <uib-accordion-group heading="Sprint Feedback" style="width:70%" panel-class="panel-primary">
+     	<p><h3>Please answers few questions about Team Work within your team</h3></p>
+
+     	<div class="well well-sm" ng-repeat="feedback in qlist track by feedback.votingQue.id">
      		<div class="row"  >
-     			<div class="col-sm-8"  align="right" >
-     			<font size="4">assignments was distributed fairly.</font>
+     			<div class="col-sm-6"  align="left" >
+     			<font size="4">{{ feedback.votingQue.question }}</font>
      			</div>
-     			<div class="col-sm-4"  align="center">
-     			<uib-rating ng-model="rate" max="max" read-only="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['one','two','three']" aria-labelledby="default-rating"></uib-rating>
-<span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>
+     			<div class="col-sm-5"  align="center" >
+     			<uib-rating ng-model="feedback.rating" max="max" read-only="isReadonly" on-hover="hoveringOver(value,$index)" on-leave="overStar = null" titles="['Strongly Disagree','Disagree','Neither Agree Nor Disagree','Agree','Storngly Agree']" aria-labelledby="default-rating"> </uib-rating>
+     			</div>
+     			<div class="col-sm-1"  align="center">
+     			
+				<!-- <span class="label" id="{{$index}}" ng-class="{'label-warning': {{percent[$index]}}<30, 'label-info': {{percent[$index]}}>=30 && {{percent[$index]}}<70, 'label-success': {{percent[$index]}}>=70}" ng-show="overStar>0">{{percent[$index]}}%</span> -->
+										<!-- ng-show= "overStar && !isReadonly" -->
      			</div>
      		</div>
        	</div>
-        <div class="well well-sm">Normal Well</div>
-         <div class="well well-sm">Normal Well</div>
+       	<!-- <div ng-repeat="question in qlist track by question.id">
+       		Selection: {{question.rating}} length:{{qlist.length}}
+       	</div> -->
+       	
+       	
+        <!-- <div class="well well-sm">
+<uib-rating ng-model="rate" max="max" read-only="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['one','two','three']" aria-labelledby="default-rating"></uib-rating>
+<span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>
+
+
+        </div> -->
+      <!--    <div class="well well-sm">Normal Well</div>
           <div class="well well-sm">Normal Well</div>
            <div class="well well-sm">Normal Well</div>
-           <div class="well well-sm">Normal Well</div>
+           <div class="well well-sm">Normal Well</div> -->
 
      
     </uib-accordion-group>
@@ -51,11 +140,7 @@
 
 </div>
 
-<div ng-app="myApp.voting"  ng-init="teamList=[
-{name:'', lastname:''},
-{name:'test1', lastname:'test1'},
-{name:'test2', lastname:'test2'},
-{name:'test3', lastname:'test3'}]" style="background-image: url('images/voting.png')">
+<!-- <div ng-app="myApp.voting"  ">
 
 
 
@@ -66,7 +151,7 @@
 			<td><label>Select the Team Performer</label></td>
 			<td>
 			  <select  class="form-control" ng-model="selectedPerformer" ng-options="member.name for member in teamList">
-			    <!-- <option ng-repeat="member in teamList"> -->
+			    
 			    
 			  </select>
 			  </td>
@@ -98,8 +183,8 @@ The team takes collective responsibility for completing group assignments.
 Overall, how satisfied are you with the spirit of teamwork within your Team?	
 </td><td>Slider Here</td>
 </table>
-<uib-rating ng-model="rate" max="max" read-only="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['one','two','three']" aria-labelledby="default-rating"></uib-rating>
-<span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>
-<button ng-click="saveMember()">save member</button>
-<button ng-click="getMember()">get member</button>
+ -->
+<!-- <button ng-click="saveMember()">Submit</button>
+<br/>
+<button ng-click="getMember()">get member</button> -->
 </div>
