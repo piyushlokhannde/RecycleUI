@@ -12,6 +12,10 @@ angular.module('myApp.voting', ['ngRoute', 'ngResource', 'ui.bootstrap'])
 .factory('MemberService', function ($resource) {
     return $resource('http://localhost:8080/getTeamMemberList/:sprintId',{sprintId: "@sprintId"});
 })
+.factory('MemberServiceSave', function ($resource) {
+    return $resource('http://localhost:8080/addTeamMemberList/');
+})
+
 .factory('QuestionService', function ($resource) {
     return $resource('http://127.0.0.1:8080/getSprintFeedbackData/:id');
 })
@@ -23,7 +27,7 @@ angular.module('myApp.voting', ['ngRoute', 'ngResource', 'ui.bootstrap'])
 })
 
 
-.controller('votingCtrl', function($scope , $http, $rootScope, $location ,MemberService,QuestionService,QuestionServiceForSave) {
+.controller('votingCtrl', function($scope , $http, $rootScope, $location ,MemberService,MemberServiceSave,QuestionService,QuestionServiceForSave) {
 
 //method navigate
 $scope.go = function ( path ) {
@@ -87,17 +91,17 @@ $scope.hoveringOver = function(value,index) {
         
         QuestionServiceForSave.save(angular.toJson($scope.qlist),
          function(success) {
-                alert("Team Member Saved");
-                alert(angular.toJson(success));
+                alert("Questions Saved");
+                /*alert(angular.toJson(success));*/
                 
             },
             function(err) {
-                alert("Team Member Not saved");
+                alert("Question Not saved");
                 alert(angular.toJson(err));
-                
-            }
+                }
             );
-
+        //Save Performer Team List
+        $scope.saveMember();
     }
 
     $scope.getArray = function(listLength){
@@ -108,12 +112,12 @@ $scope.hoveringOver = function(value,index) {
 
 //Save membner
     $scope.saveMember = function() {  	
-
-    	MemberService.save(angular.toJson($scope.TeamMember),
+        alert("calling Save teammember web MemberService");
+    	MemberServiceSave.save(angular.toJson($scope.teamList),
 
     		function(success) {
     			alert("Team Member Saved");
-    			alert(angular.toJson(success));
+    			/*alert(angular.toJson(success));*/
     			
     		},
     		function(err) {
@@ -136,7 +140,7 @@ $scope.getTeamList = function(id) {
 
             function(success) {
                 
-                alert(angular.toJson(success));
+                /*alert(angular.toJson(success));*/
                 
             },
             function(err) {
@@ -164,7 +168,7 @@ $scope.getTeamList = function(id) {
      for(var i = 0; i < $scope.teamList.length; i++) {
         if($scope.teamList[i].empName == member.name.empName) {
 
-        $scope.teamList[i].isSelected = 'true';
+        $scope.teamList[i].selected = 'true';
         }
     }
     }
