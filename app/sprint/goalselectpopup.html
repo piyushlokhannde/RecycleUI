@@ -15,7 +15,7 @@
         Select Goal<span class="caret"></span>
       </button>
       <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-        <li role="menuitem"  ng-repeat="action in actions"  ><a ng-click="change($index)" >{{action}}</a></li>             
+        <li role="menuitem"  ng-repeat="action in actions"  ><a ng-click="change($index)" >{{action.goalName}}</a></li>             
       </ul>
     </div>
 
@@ -28,11 +28,11 @@
     <div class="well">
       <div class="form-group"  ng-repeat="goal in goalList" >
         <div class="col-sm-9">
-          <label for="{{goal.name}}" style="text-align: center">{{goal.name}}</label> 
+          <label for="{{goal.goalName}}" style="text-align: center">{{goal.goalName}}</label> 
         </div>       
         <div class="col-sm-3">
 
-		      <input class="input-sm"  type="text"  id="{{goal.name}}" maxlength="3" size="1"  align="left"  ng-model="goal.percent"  ng-blur="calTotalPer()" required><b>&nbsp%</b>         
+		      <input class="input-sm"  type="text"  id="{{goal.goalName}}" maxlength="3" size="1"  align="left"  ng-model="goal.weightage"  ng-blur="calTotalPer()" required><b>&nbsp%</b>         
         </div>
       </div>  
     </div>

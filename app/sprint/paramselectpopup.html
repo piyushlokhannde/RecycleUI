@@ -15,7 +15,7 @@
         Select Parameter<span class="caret"></span>
       </button>
       <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-        <li role="menuitem"  ng-repeat="action in actions"  ><a ng-click="change($index)" >{{action}}</a></li>             
+        <li role="menuitem"  ng-repeat="action in actions"  ><a ng-click="change($index)" >{{action.name}}</a></li>             
       </ul>
     </div>
 
@@ -32,7 +32,7 @@
         </div>       
         <div class="col-sm-3">
 
-		      <input class="input-sm"  type="text"  id="{{param.name}}" maxlength="3" size="1"  align="left"  ng-model="param.percent"  ng-blur="calTotalPer()" required><b>&nbsp%</b>         
+		      <input class="input-sm"  type="text"  id="{{param.name}}" maxlength="3" size="1"  align="left"  ng-model="param.weightage"  ng-blur="calTotalPer()" required><b>&nbsp%</b>         
         </div>
       </div>  
     </div>
