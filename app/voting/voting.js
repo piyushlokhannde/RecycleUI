@@ -36,16 +36,6 @@ VotingDetail.sprintId = "";
 VotingDetail.member = new Object;
 VotingDetail.rating = "";
 
-
-/*$http.defaults.headers.put = {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, X-Requested-With'
-        };
-        $http.defaults.useXDomain = true;*/
-
-
-
 $scope.getVotingQues = function () {
 
 
@@ -111,7 +101,7 @@ $scope.hoveringOver = function(value,index) {
     }
 
     $scope.getArray = function(listLength){
-        // alert( Math.round(listLength*(1/3)) );
+        
         return new Array(Math.round(listLength*(1/3)));
         
     }
@@ -163,9 +153,7 @@ $scope.getTeamList = function(id) {
          sprintObject.id = "1";
          $scope.qlist=new Array();
     	$scope.qlist = QuestionService.query({id: sprintObject.id});
-        // $scope.qlist = sprintObject.votingQue;
-
-    	// alert("Team Member Fetched"+$scope.qlist);
+        
 
     }
 

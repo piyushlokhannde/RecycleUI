@@ -2,22 +2,7 @@
   <font  size="8" color="white">Voting</font>
 </div> <!-- getVotingQues($scope, $http); -->
 <div ng-app="myApp.voting" class="container" align="center" ng-init="getSprintDetails('1');getTeamList('1')">
-<!-- teamList=[
-{name:'', lastname:'',isSelected:''},
-{name:'Taufique', lastname:'Taufique', isSelected:'false'},
-{name:'Piyush', lastname:'Piyush', isSelected:''},
-{name:'Manjit', lastname:'Manjit', isSelected:''},
-{name:'Vinod', lastname:'Vinod', isSelected:''}]"> --> <!--
 
-
-
-qlist=[{id: '1',que:'Work assignments was distributed fairly.',rating:''},
-{id: '2',que:'Sufficient effort is made to get the opinions and ideas of Team members.',rating:''},
-{id: '3',que:'Team members are held accountable for the decisions they make.',rating:''},
-{id: '4',que:'The team takes collective responsibility for completing group assignments.',rating:''},
-{id: '5',que:'Overall, how satisfied are you with the spirit of teamwork within your Team?',rating:''}]; 
-percent = [qlist.length]" > -->
- <!-- style="background-image: url('images/voting.png')"> -->
 
 <style type="text/css">
 .glyphicon.glyphicon-star{
@@ -54,21 +39,8 @@ percent = [qlist.length]" > -->
 	<div ng-repeat="x in getArray(teamList.length) track by $index">
 
 
-	<!-- <div class="row top-buffer"> -->
-	<!-- ------------------ -->
-	<!--   <div class="form-group "> 
-                  <div class="col-sm-10 well well-sm" > 
-                    <span class="label" for="teamListSelect_$index">Please select the Team Performer</span>
-                    <select  id="teamListSelect_$index" class="form-control" ng-model="member.name" ng-change="memberChanged(member)" style="width: 30%;"
-      ng-options="member.empName for member in teamList ">
-      </select>
-                  
-                </div>  
-</div> -->
-	<!-- ------------------------ -->
 
-
-<div class="row"> 
+<div class="row top-buffer"> 
 
 	
 	<div class="col-sm-6 " style="align:right" >
@@ -86,14 +58,7 @@ percent = [qlist.length]" > -->
       </select>
       </div>
       </div>
-      <!-- </div> -->
-       <!-- <div ng-repeat = "mem in teamList | filter: {isSelected:'true'}">
-                  SElected - > {{mem}}
-      </div>   -->
-
       
-      
-      <!-- </div> -->
  	</div>
     </uib-accordion-group>
 
@@ -111,28 +76,10 @@ percent = [qlist.length]" > -->
      			</div>
      			<div class="col-sm-1"  align="center">
      			
-				<!-- <span class="label" id="{{$index}}" ng-class="{'label-warning': {{percent[$index]}}<30, 'label-info': {{percent[$index]}}>=30 && {{percent[$index]}}<70, 'label-success': {{percent[$index]}}>=70}" ng-show="overStar>0">{{percent[$index]}}%</span> -->
-										<!-- ng-show= "overStar && !isReadonly" -->
      			</div>
      		</div>
        	</div>
-       	<!-- <div ng-repeat="question in qlist track by question.id">
-       		Selection: {{question.rating}} length:{{qlist.length}}
-       	</div> -->
-       	
-       	
-        <!-- <div class="well well-sm">
-<uib-rating ng-model="rate" max="max" read-only="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['one','two','three']" aria-labelledby="default-rating"></uib-rating>
-<span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>
-
-
-        </div> -->
-      <!--    <div class="well well-sm">Normal Well</div>
-          <div class="well well-sm">Normal Well</div>
-           <div class="well well-sm">Normal Well</div>
-           <div class="well well-sm">Normal Well</div> -->
-
-     
+       	     
     </uib-accordion-group>
 </uib-accordion>
 
@@ -140,51 +87,4 @@ percent = [qlist.length]" > -->
 
 </div>
 
-<!-- <div ng-app="myApp.voting"  ">
-
-
-
-<div class="jumbotron" >
-  <div class="container text-center">
-		<table class="table table-condensed table-striped" align="center" style="align-self: center; width:50%" title="Team Performer"> 
-		<tr>
-			<td><label>Select the Team Performer</label></td>
-			<td>
-			  <select  class="form-control" ng-model="selectedPerformer" ng-options="member.name for member in teamList">
-			    
-			    
-			  </select>
-			  </td>
-		</tr>
-		</table>
-		<h3 align="center"> 
-		Please answers few question about Team Work within your team</h3>
-		<table table table-condensed table-striped" align="center" border="2" style="align-self: center; width:50%">
-		<thead><tr><td align="center"><h4><b>Questions</h4></td><td  align="center"><h4>Rating</b></h4></td></td></tr></thead>
-		<tr><td>
-Work assignments was distributed fairly.
-</td><td>
-Slider Here
-
-</td></tr><tr><td>
-Sufficient effort is made to get the opinions and ideas of Team members. 
-</td><td>
-Slider Here
-</td></tr><tr><td>
-Team members are held accountable for the decisions they make.
-</td><td>
-Slider Here
-
-</td></tr><tr><td>
-communication within the team
-</td><td>Slider Here</td></tr><tr><td>
-The team takes collective responsibility for completing group assignments.
-</td><td>Slider Here</td></tr><tr><td>
-Overall, how satisfied are you with the spirit of teamwork within your Team?	
-</td><td>Slider Here</td>
-</table>
- -->
-<!-- <button ng-click="saveMember()">Submit</button>
-<br/>
-<button ng-click="getMember()">get member</button> -->
 </div>
