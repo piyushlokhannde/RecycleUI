@@ -9,7 +9,7 @@
 <div style="width:70%" >
 
 
-<button class="btn btn-success  btn-lg" ng-model="checkModel.left" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Delete Sprint">Delete</button>
+<button class="btn btn-success  btn-lg"  ng-click="addUser()" ng-model="checkModel.left" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Delete Sprint">Delete</button>
  <button class="btn btn-success  btn-lg" ng-model="checkModel.left" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Cancel Changes">Cancel</button>
   <button class="btn btn-success  btn-lg" ng-model="checkModel.left" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Save Sprint Data">Save </button>
   <button class="btn btn-success btn-lg" ng-model="checkModel.middle" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Start Sprint">Start</button>
@@ -21,7 +21,7 @@
 <br>
 <div id="paneldiv"  style="width:100%"  align="left">
 <uib-accordion close-others="true" id="parent"  >
-  <uib-accordion-group heading="Sprint Details" panel-class="panel-primary " is-open="true">
+  <uib-accordion-group heading="Sprint Details" panel-class="panel-primary " is-open="false">
 
   </uib-accordion-group>
 
@@ -30,32 +30,93 @@
     <button class="btn btn-danger">Delete</button>
   </uib-accordion-group>
 
-  <uib-accordion-group heading="Goal Details" panel-class="panel-primary" >   
-    <button class="btn btn-danger btn-sm" ng-click="addGoal()"  ng-model="checkModel.right" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Add Goal">Add Goal</button>
+  <uib-accordion-group heading="Goal Details" panel-class="panel-primary" is-open="true" >   
+    <button class="btn btn-danger btn-sm" ng-click="addGoal()" ng-model="checkModel.right" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Add Goal">Add Goal</button>
     <button class="btn btn-danger btn-sm"  ng-click="removeGoal()" ng-model="checkModel.right" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Delete Goal">Remove Goal</button>
     
     <br>   
     <br>  
     <uib-accordion close-others="true"  id="goalsparent">
-      <uib-accordion-group  id ="{{goal.name}}" ng-click="setgroup($index)" ng-repeat="goal in goals" heading="{{goal.name}}" panel-class="panel-danger">   
+      <uib-accordion-group  id ="{{goal.name}}" ng-click="setgoal($index)" ng-repeat="goal in goals" heading="{{goal.name}}" panel-class="panel-danger" is-open="true">   
            <uib-accordion close-others="true"  id="{{goal.name}}_parameters">
-           <div class="form-group"> 
+           <div class="form-group "> 
            <div class="col-sm-4">           
-              <button class="btn btn-info btn-sm" ng-click="addParam()" ng-model="checkModel.right" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Add Parameter">Add Parameter</button>
+              <button class="btn btn-info btn-sm" ng-click="addParam(goal)" ng-model="checkModel.right" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Add Parameter">Add Parameter</button>
               <button class="btn btn-info btn-sm"  ng-click="removeParam()" ng-model="checkModel.right" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Remove Parameter">Remove Parameter</button> 
             </div>  
-            
-           
            
             <div class="col-sm-8" align="right"> 
              <label for="inputWarning">Goal Percentage:</label>
-               <input type="text" class="input-sm" id="inputWarning" maxlength="3" size="3"  disabled="true"> % 
+               <input type="text" class="input-sm" id="inputWarning" maxlength="3" size="3"  disabled="true" value={{goal.percent}}> % 
             </div>   
 
             </div>         
             <br>   
             <br>    
-            <uib-accordion-group  ng-click="setparameter($parent.$index, $index)" ng-repeat="parameter in goal.parameters"   id ="{{parameter.name}}" heading="{{parameter.name}}" panel-class="panel-info">
+            <uib-accordion-group  ng-click="setparameter($parent.$index, $index)" ng-repeat="parameter in goal.parameters"   id ="{{parameter.name}}" heading="{{parameter.name}}" panel-class="panel-info" is-open="true">
+              <div class="form-group"> 
+                <div class="col-sm-8" align="left"> 
+                  <font size="3" ng-if="true"><b>Please enter the expected value in range.<b></font>
+                  <font size="3" ng-if="true"><b>Please enter the expected value.<b></font>
+                  <font size="3" ng-if="true"><b>Please enter the number of instances.<b></font>
+                  <font size="3" ng-if="true"><b>Please enter the actual value.<b></font>
+                </div>
+                <div class="col-sm-4" align="right"> 
+                  <label for="inputWarning">Parameter Percentage:</label>
+                  <input type="text" class="input-sm" id="paramPercent" maxlength="3" size="3"  disabled="true" value={{parameter.percent}}> % 
+                </div>
+              </div>
+              <br>
+              <br>
+
+              <span ng-if="false" >
+                <div class="form-group "> 
+                  <div class="col-sm-4 well well-sm" align="left"> 
+                    <label for="inputWarning">Expected Values:</label>
+                    <input type="text" class="input-sm" id="{{parameter.name}}_from" maxlength="5" size="5"   ng-bind="{{parameter.from}}"> -
+                    <input type="text" class="input-sm" id="{{parameter.name}}_to" maxlength="5" size="5"   ng-bind="{{parameter.to}}">
+                  </div>
+                  <div class="col-sm-8 well well-sm" align="left"> 
+                    <label for="inputWarning">Actual Value:</label>
+                    <input type="text" class="input-sm" id="{{parameter.name}}_actual" " maxlength="5" size="5"   value={{parameter.actual}}> 
+                  </div>
+                </div>  
+              </span>
+              <span ng-if="false" >
+                 <div class="form-group "> 
+                  <div class="col-sm-3 well well-sm" align="left"> 
+                    <label for="inputWarning">Expected Value:</label>
+                    <input type="text" class="input-sm" id="{{parameter.name}}_from" maxlength="5" size="5"   ng-bind="{{parameter.from}}">
+                  </div>
+                  <div class="col-sm-9 well well-sm" align="left"> 
+                    <label for="inputWarning">Actual Value:</label>
+                    <input type="text" class="input-sm" id="{{parameter.name}}_actual" " maxlength="5" size="5"   value={{parameter.actual}} > 
+                  </div>
+                </div> 
+              </span>
+
+
+             <span ng-if="false" >
+              <div class="form-group" > 
+                <div class="col-sm-12 well well-sm" align="left"> 
+                  <label for="inputWarning">Inovation1: </label>  
+                   <input type="text" class="input-sm" id="{{parameter.name}}_actual" " maxlength="5" size="5"   value={{parameter.actual}}>                                  
+                </div> 
+              </div>    
+                <div class="form-group" > 
+                <div class="col-sm-12 well well-sm" align="left"> 
+                  <label for="inputWarning">Inovation1: </label>  
+                   <input type="text" class="input-sm" id="{{parameter.name}}_actual" " maxlength="5" size="5"   value={{parameter.actual}}>                                  
+                </div> 
+                </div> 
+                <div class="form-group" > 
+                <div class="col-sm-12 well well-sm" align="left"> 
+                  <label for="inputWarning">Inovation1: </label>  
+                   <input type="text" class="input-sm" id="{{parameter.name}}_actual" " maxlength="5" size="5"   value={{parameter.actual}}>                                  
+                </div>               
+              </div> 
+             </span>
+
              </uib-accordion-group>
           </uib-accordion> 
 

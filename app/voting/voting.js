@@ -49,7 +49,7 @@ $scope.hoveringOver = function(value) {
     $scope.getMember = function() {
 
     	 
-    	$scope.TeamMember = MemberService.get({teammember: $scope.TeamMember.ID}
+    	$scope.TeamMember = MemberService.get({teammember: "1"}
 
     		);
     	alert("Team Member Fetched");
