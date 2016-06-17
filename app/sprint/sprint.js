@@ -232,8 +232,16 @@ sprintapp.controller('sprintCtrl',function($scope, $uibModal, MasterTeamService,
                                 var projectAvg = $scope.projectLevelAvg;
                                 //var teamList = $scope.teamMemDropDown;
                                 var sum=0;
+                                if(teamList.length ==0){
+                                	return;
+                                }
+
                                 for (var i=0;i<teamList.length;i++){
-                                                sum = parseInt(sum,10) + parseInt(teamList[i].teamMemberTotal,10);
+                                				var temp = 0;
+                                				if(!isNaN(teamList[i].teamMemberTotal)) {
+													temp = teamList[i].teamMemberTotal;
+                                				}
+                                                sum = parseInt(sum,10) + parseInt(temp);
                                 }
 
                                 var teamAvg = sum/teamList.length;
