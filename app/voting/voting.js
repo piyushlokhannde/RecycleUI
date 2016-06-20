@@ -81,7 +81,7 @@ $scope.hoveringOver = function(value,index) {
     $scope.percent[index] = 100 * (value / $scope.max);
      // alert('over overStar'+$scope.overStar+'value'+value+' and index'+index+'percent'+$scope.percent[index]+' length:'+$scope.percent.length);
 } catch(errr){
-    alert(errr);
+    //alert(errr);
 }
   };
 
@@ -91,13 +91,13 @@ $scope.hoveringOver = function(value,index) {
         
         QuestionServiceForSave.save(angular.toJson($scope.qlist),
          function(success) {
-                alert("Questions Saved");
-                /*alert(angular.toJson(success));*/
+                
+                alert("Data Saved Successfully");
                 
             },
             function(err) {
-                alert("Question Not saved");
-                alert(angular.toJson(err));
+                
+                //alert(angular.toJson(err));
                 }
             );
         //Save Performer Team List
@@ -112,17 +112,17 @@ $scope.hoveringOver = function(value,index) {
 
 //Save membner
     $scope.saveMember = function() {  	
-        alert("calling Save teammember web MemberService");
+        //alert("calling Save teammember web MemberService");
     	MemberServiceSave.save(angular.toJson($scope.teamList),
 
     		function(success) {
-    			alert("Team Member Saved");
+    	//		alert("Team Member Saved");
     			/*alert(angular.toJson(success));*/
     			
     		},
     		function(err) {
-    			alert("Team Member Not saved");
-    			alert(angular.toJson(err));
+    	//		alert("Team Member Not saved");
+    	//		alert(angular.toJson(err));
     			
     		}
     		);
@@ -144,8 +144,8 @@ $scope.getTeamList = function(id) {
                 
             },
             function(err) {
-                alert("Team Member Fetched error");
-                alert(angular.toJson(err));
+          //      alert("Team Member Fetched error");
+            //    alert(angular.toJson(err));
                 
             }
             );  
