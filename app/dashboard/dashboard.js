@@ -11,10 +11,9 @@ dashboardapp.config(['$routeProvider', function($routeProvider) {
 dashboardapp.controller('dashboardCtrl', function($scope) {
 
    $scope.exampleData2 = [
-            { key: "Team One", y: 100 },
-            { key: "TeamTwo", y: 2 },
-            { key: "TeamThree", y: 20 },
-            { key: "TeamFour", y: 7 },
+            { key: "Team Chicago Bulls", y: 100 },
+            { key: "Team LA Lakers", y: 2 },
+            { key: "Team Houstan Rockets", y: 20 }
             ];
             
             
@@ -32,21 +31,17 @@ dashboardapp.controller('dashboardCtrl', function($scope) {
 
              $scope.exampleData1 = [
                  {
-                    "key": "TeamFour",
+                    "key": "Team Chicago Bulls",
                      "values": [  [ 1 , 10] ,[ 2 , 10], [ 3, 10]]
                  },
                  {
-                     "key": "TeamTwo ",
+                     "key": "Team LA Lakers",
                      "values": [ [ 1 , 11] , [ 2 , 8]  , [ 3 , 8]]
                  },
                  {
-                     "key": "TeamThree ",
+                     "key": "Team Houstan Rockets",
                      "values": [  [ 1 , 12],[ 2 , 12],[ 3 , 12] ]
-                },
-                 {
-                     "key": "TeamOne",
-                     "values": [  [ 1 , 12],[ 2 , 12],[ 3 , 12]]
-                 }
+                }
              ];
 
             $scope.xAxisTickFormatFormat  = function() {
@@ -70,38 +65,34 @@ dashboardapp.controller('dashboardCtrl', function($scope) {
 
              $scope.exampleDataperf = [
                  {
-                    "key": "TeamFour",
+                    "key": "Team Houstan Rockets",
                      "values": [  [ 1 , 1] ,[ 2 , 3], [ 3, 21]]
                  },
                  {
-                     "key": "TeamTwo ",
+                     "key": "Team LA Lakers",
                      "values": [ [ 1 , 11] , [ 2 , 4]  , [ 3 ,5]]
                  },
                  {
-                     "key": "TeamThree ",
+                     "key": "Team Chicago Bulls",
                      "values": [  [ 1 , 1],[ 2 , 5],[ 3 , 6] ]
-                },
-                 {
-                     "key": "TeamOne",
-                     "values": [  [ 1 , 1],[ 2 , 6],[ 3 , 7]]
-                 }
+                }
              ];
 
               $scope.exampleData4 = [
                  {
-                    "key": "TeamMem1",
+                    "key": "Manjeet",
                      "values": [[ 0 , 200] ]
                  },
                  {
-                     "key": "TeamMem2 ",
+                     "key": "Rakesh ",
                      "values": [ [ 0 , 180] ]
                  },
                  {
-                     "key": "TeamMem3 ",
+                     "key": "Vinod ",
                      "values": [  [ 0 , 170] ]
                 },
                  {
-                     "key": "TeamMem4",
+                     "key": "Taufiq",
                      "values": [  [ 0 , 165]]
                  }
                  ,
@@ -138,21 +129,17 @@ dashboardapp.controller('dashboardCtrl', function($scope) {
 
               $scope.sprintFeedbackdata = [
                  {
-                    "key": "TeamFour",
+                    "key": "Team Houstan Rockets",
                      "values": [  [ 1 , 1] ,[ 2 , 3], [ 3, 9], [ 4, 6], [ 5, 10]]
                  },
                  {
-                     "key": "TeamTwo ",
+                     "key": "Team LA Lakers",
                      "values": [ [ 1 , 4] ,[ 2 , 5], [ 3, 3], [ 4, 5], [ 5, 12]]
                  },
                  {
-                     "key": "TeamThree ",
+                     "key": "Team Chicago Bulls",
                      "values": [   [ 1 , 2] ,[ 2 , 9], [ 3, 5], [ 4, 4], [ 5, 11]]
-                },
-                 {
-                     "key": "TeamOne",
-                     "values": [   [ 1 , 6] ,[ 2 , 9], [ 3, 7], [ 4, 1], [ 5, 14]]
-                 }
+                }
              ];
 
               $scope.xAxissprintfeedbackFormat  = function() {
@@ -160,20 +147,20 @@ dashboardapp.controller('dashboardCtrl', function($scope) {
                 return function (d) {              
                 switch (d) {
                     case 1:
-                        return "Criteria1";
+                        return "Question1";
                         break;
                     case 2:
-                        return "Criteria2";
+                        return "Question2";
                         break;
 
                     case 3:
-                        return "Criteria3";
+                        return "Question3";
                         break;
                      case 4:
-                        return "Criteria4";
+                        return "Question4";
                         break;
                      case 5:
-                        return "Criteria5";
+                        return "Question5";
                         break;
                      
 
