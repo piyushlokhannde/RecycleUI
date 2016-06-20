@@ -1,0 +1,45 @@
+<form class="form-horizontal" role="form" ng-submit="submitUser()" name="getAllSprintSummaryPopup">
+  <div class="modal-header" style="background-color:#DB7093;">
+            <h4 class="modal-title" style="color:white">All Sprint Summary</h4>
+  </div>
+  <div class="modal-body Well" align="left" >  
+    <div class="form-group  Well"  align="left" >
+    <div class="col-sm-1">
+      <h4>Id</h4>
+    </div>
+    <div class="col-sm-4">
+       <h4>Sprint Name</h4>
+    </div>
+    <div class="col-sm-2">
+       <h4>Status</h4>
+    </div>
+    <div class="col-sm-2">
+       <h4>Start Date</h4>
+    </div>
+    <div class="col-sm-3">
+       <h4>End Date</h4>
+    </div>
+    <div class="col-sm-12"><hr size="30"></div>
+    </div>
+    
+    <div class="form-group"  ng-repeat="sprintSummay in sprintSummayList" >
+    <div class="col-sm-1">
+      {{sprintSummay.id}}
+    </div>
+    <div class="col-sm-4">
+     <a ng-click="selectedSprint($index)">{{sprintSummay.name}}</a>
+    </div>
+    <div class="col-sm-2">
+     {{sprintSummay.sprintStatus}}
+    </div>
+    <div class="col-sm-2">
+      {{sprintSummay.startDate | date:'dd-MMM-yyyy'}}
+    </div>
+    <div class="col-sm-3">
+     {{sprintSummay.endDate | date:'dd-MMM-yyyy'}}
+    </div>
+      <div class="col-sm-12"><hr size="4"></div>
+    </div>
+
+  </div>  
+</form>

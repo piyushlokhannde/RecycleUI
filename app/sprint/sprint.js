@@ -5,20 +5,37 @@ var sprintapp = angular.module('myApp.sprint', ['ngRoute', 'ui.bootstrap', 'ngRe
 
 
 sprintapp.factory('MasterGoalService', function ($resource) {
-    return $resource('http://10.253.191.49:8080/getMasterGoals');
+    return $resource('http://localhost:8080/getMasterGoals');
 });
 
 sprintapp.factory('MasterParamService', function ($resource) {
-    return $resource('http://10.253.191.49:8080/getSprintParameters');
+    return $resource('http://localhost:8080/getSprintParameters');
 });
 
 sprintapp.factory('MasterTeamService', function ($resource) {
-    return $resource('http://10.253.191.49:8080/getTeams');
+    return $resource('http://localhost:8080/getTeams');
 });
 
 sprintapp.factory('MasterTeamMemberService', function ($resource) {
-    return $resource('http://10.253.191.49:8080/getTeamMembers');
+    return $resource('http://localhost:8080/getTeamMembers');
 });
+
+sprintapp.factory('SprintService', function ($resource) {
+    return $resource('http://localhost:8080/createsprint');
+});
+
+sprintapp.factory('GetAllSprintSummary', function ($resource) {
+    return $resource('http://localhost:8080/getAllSprintSummary');
+});
+
+sprintapp.factory('GetSprintData', function ($resource) {
+    return $resource('http://localhost:8080/getSprintData/:sprintId', {sprintId: '@_sprintId' });
+});
+sprintapp.factory('SprintHealthService', function ($resource) {
+
+    return $resource('http://10.253.191.49:8080/getSprintHealthCount');
+});
+
 
 
 
@@ -85,10 +102,6 @@ sprintapp.controller('DialogInstCtrl', function($scope, $uibModalInstance, goala
 	$scope.goalList = goalarray;
 	$scope.goalTotal = caluclateTotal(goalarray);
 
-	 
-
-
-
 	$scope.calTotalPer = function () {	
 		$scope.goalTotal = caluclateTotal($scope.goalList);
 	}
@@ -132,18 +145,167 @@ sprintapp.config(['$routeProvider', function($routeProvider) {
   });
 }])
 
-sprintapp.controller('sprintCtrl',function($scope, $uibModal, MasterTeamService, MasterTeamMemberService) {
+sprintapp.controller('sprintCtrl',function($scope, $uibModal, MasterTeamService, MasterTeamMemberService,SprintHealthService, SprintService) {
 
 	var seleectdGoal=-1;
 	var parmeterGoal =-1;
     var selParam =-1;
 
-   $scope.teams = MasterTeamService.query();
-  	$scope.teamMemDropDown = MasterTeamMemberService.query();
+ //  $scope.teams = MasterTeamService.query();
+  //	$scope.teamMemDropDown = MasterTeamMemberService.query();
    //alert(teams);
+   $scope.setNoDays =function () {
+
+   			//var startDate = $scope.sprint.endDate.getTime();
+   		var  startdate =$scope.sprint.startDate.getTime();
+   		var enddate = $scope.sprint.endDate.getTime();
+   		//alert(endDate);
+   		 $scope.sprint.noOfDays = (enddate-startdate)/ (1000*60*60*24);
+
+
+   }
+//Method to fetch Project Level Team Member avg
+     
+     $scope.getProjectLevelAvg = function() {
+     	//alert("fetching AVG");
+var test = new Object();
+     	 test = SprintHealthService.get(
+     	 	function(success) {
+                $scope.projectLevelAvg = success.value;
+       //         alert("Sucess"+angular.toJson(success));
+                
+            },
+            function(err) {
+        //        alert("Team Member Fetched error");
+       //         alert(angular.toJson(err));
+                
+            }
+            );
+     	
+     //	alert(angular.toJson(test) +" and setvalue:"+$scope.projectLevelAvg );
+     };
+
+   $scope.today = function() {
+    $scope.dt = new Date();
+  };
+  $scope.today();
+
+  $scope.clear = function() {
+    $scope.dt = null;
+  };
+
+  $scope.inlineOptions = {
+    customClass: getDayClass,
+    minDate: new Date(),
+    showWeeks: true
+  };
+
+  $scope.dateOptions = {
+    dateDisabled: disabled,
+    formatYear: 'yy',
+    maxDate: new Date(2020, 5, 22),
+    minDate: new Date(),
+    startingDay: 1
+  };
+
+  // Disable weekend selection
+  function disabled(data) {
+    var date = data.date,
+      mode = data.mode;
+    return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
+  }
+
+  $scope.toggleMin = function() {
+    $scope.inlineOptions.minDate = $scope.inlineOptions.minDate ? null : new Date();
+    $scope.dateOptions.minDate = $scope.inlineOptions.minDate;
+  };
+
+  $scope.toggleMin();
+
+  $scope.open1 = function() {
+    $scope.popup1.opened = true;
+  };
+
+  $scope.open2 = function() {
+    $scope.popup2.opened = true;
+  };
+
+  $scope.setDate = function(year, month, day) {
+    $scope.dt = new Date(year, month, day);
+  };
+
+  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+  $scope.format = $scope.formats[0];
+  $scope.altInputFormats = ['M!/d!/yyyy'];
+
+  $scope.popup1 = {
+    opened: false
+  };
+
+  $scope.popup2 = {
+    opened: false
+  };
+
+  var tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  var afterTomorrow = new Date();
+  afterTomorrow.setDate(tomorrow.getDate() + 1);
+  $scope.events = [
+    {
+      date: tomorrow,
+      status: 'full'
+    },
+    {
+      date: afterTomorrow,
+      status: 'partially'
+    }
+  ];
+
+  function getDayClass(data) {
+    var date = data.date,
+      mode = data.mode;
+    if (mode === 'day') {
+      var dayToCheck = new Date(date).setHours(0,0,0,0);
+
+      for (var i = 0; i < $scope.events.length; i++) {
+        var currentDay = new Date($scope.events[i].date).setHours(0,0,0,0);
+
+        if (dayToCheck === currentDay) {
+          return $scope.events[i].status;
+        }
+      }
+    }
+
+    return '';
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   $scope.openStartDate = function() {
+   	alert($scope.sddatapicker);
+    	$scope.sddatapicker = true;
+
+  	};
+
+
+
+  
 	
 	$scope.goals = new Array();
-
+	$scope.sprint = new Object();
+	$scope.sprint.sprintStatus = "Draft";
 
 	$scope.removeGoal = function () {	
 			if(seleectdGoal > 0) {
@@ -177,6 +339,50 @@ sprintapp.controller('sprintCtrl',function($scope, $uibModal, MasterTeamService,
 	}
 
 
+	$scope.showMsg = function(){
+        
+    	var dialogInst = $uibModal.open({
+    		templateUrl: 'sprint/msgpopup.html',
+    		controller: 'msgpopupCntrl',
+    		size: 'sm',
+    		resolve: {
+    			msg: function () {
+    				return $scope.message;
+    			}
+    		}
+		});
+
+		dialogInst.result.then(function () {
+			
+				
+		}, function () {
+			 // $log.info('Modal dismissed at: ' + new Date());
+			});
+     };
+
+
+	$scope.loadSprint = function(){
+        
+    	var dialogInst = $uibModal.open({
+    		templateUrl: 'sprint/getAllSprintSummaryPopup.html',
+    		controller: 'GetAllSprintSummaryCntrl',
+    		size: 'lg',
+    		resolve: {
+    			noparameter: function () {
+    				return "";
+    			}
+    		}
+		});
+
+		dialogInst.result.then(function (sprintData) {
+			$scope.sprint = sprintData;
+			$scope.teams = sprintData.teamMemberTOs;
+			$scope.goals = sprintData.sprintGoalTOs;
+				
+		}, function () {
+			 // $log.info('Modal dismissed at: ' + new Date());
+			});
+     };
 
   
     $scope.addGoal = function(){
@@ -229,21 +435,25 @@ sprintapp.controller('sprintCtrl',function($scope, $uibModal, MasterTeamService,
 
 	$scope.calculatePercentage = function(teamList){
 		                                
-                                var projectAvg = $scope.projectLevelAvg;
+                                var projectAvg = parseInt($scope.projectLevelAvg,10);
                                 //var teamList = $scope.teamMemDropDown;
                                 var sum=0;
                                 if(teamList.length ==0){
                                 	return;
                                 }
 
-                                for (var i=0;i<teamList.length;i++){
-                                				var temp = 0;
-                                				if(!isNaN(teamList[i].teamMemberTotal)) {
-													temp = teamList[i].teamMemberTotal;
-                                				}
-                                                sum = parseInt(sum,10) + parseInt(temp);
-                                }
+								for (var i=0;i<teamList.length;i++){
 
+                                	if(teamList[i].teamMemberTotal== null || isNaN(teamList[i].teamMemberTotal)) {
+                                         teamList[i].teamMemberTotal = 21;
+                                         
+                                     }
+                                     sum = parseInt(sum,10) + parseInt(teamList[i].teamMemberTotal,10);
+
+                                }
+								if(isNaN(sum)) {
+                                	sum = 0;
+                                }
                                 var teamAvg = sum/teamList.length;
 
                                 var comparedAvg = Math.round((teamAvg/projectAvg)*100)
@@ -263,10 +473,6 @@ sprintapp.controller('sprintCtrl',function($scope, $uibModal, MasterTeamService,
                                
                 };
 
-
-	$scope.addTeam = function() {
-		alert("Add Team");
-	}
 
 
 	$scope.selectTeam = function(index) {
@@ -288,11 +494,82 @@ sprintapp.controller('sprintCtrl',function($scope, $uibModal, MasterTeamService,
 
 	$scope.selectTeamMember = function(index) {
 		$scope.teamMembers.push($scope.teamMemDropDown[index]);
+		$scope.calculatePercentage($scope.teamMembers);	
+	}
+
+	$scope.fetchTeamData = function() {
+		if(!$scope.teams) {			
+			$scope.teams = MasterTeamService.query();
+  			$scope.teamMemDropDown = MasterTeamMemberService.query();
+		}
+		
+	}
+
+	
+
+  
+		//Pange function start
+	$scope.commitSprint = function() {
+
+		$scope.message = new Array();
+			 $scope.sprint.sprintStatus = "Commit";
+         		  $scope.message.push("Sprint "+$scope.sprint.name + " is Commited.");
+         		  $scope.message.push("Expected Points To be Achieved: 315");
+         		  $scope.message.push("Actual Points Achieved: 326");
+		 // $scope.message = $scope.sprint.name + ", Sprint Started. <br> Please Enter Expected Value";
+          $scope.showMsg();
 	}
 
 
+	$scope.endSprint = function() {
+			$scope.message = new Array();
+			 $scope.sprint.sprintStatus = "End";
+         		  $scope.message.push($scope.sprint.name + ", Sprint Ended.");
+         		  $scope.message.push("Please Enter the Actual Values for the Parameters.");
+		 // $scope.message = $scope.sprint.name + ", Sprint Started. <br> Please Enter Expected Value";
+          $scope.showMsg();
 
-	// Team section code end.
+	}
+
+
+	$scope.startSprint = function() {
+			 $scope.message = new Array();
+			 $scope.sprint.sprintStatus = "Start";
+         		  $scope.message.push($scope.sprint.name + ", Sprint Started.");
+         		  $scope.message.push("Please Enter the Expected Values for the Parameters.");
+		 // $scope.message = $scope.sprint.name + ", Sprint Started. <br> Please Enter Expected Value";
+          $scope.showMsg();
+
+	}
+
+	$scope.save  = function() {
+
+		
+		$scope.sprint.teamId = $scope.selectedTeam.id;
+		$scope.sprint.teamName = $scope.selectedTeam.name;
+		$scope.sprint.sprintGoalTOs = $scope.goals;
+		$scope.sprint.teamMemberTOs = $scope.teamMembers;
+		
+
+
+		SprintService.save(angular.toJson($scope.sprint),
+         function(success) {
+         		 $scope.message = new Array();
+         		  $scope.message.push($scope.sprint.name + ", Sprint Saved Successfully.");
+               
+                $scope.showMsg();
+              //  angular.toJson(success);
+                $scope.sprint.id = success.value;
+                
+            },
+            function(err) {
+                alert("Error in Saving the Sprint");
+                //alert(angular.toJson(err));
+                
+            }
+            );
+	}
+	//Pange function start
 
 });
 
@@ -344,4 +621,45 @@ sprintapp.service("goalListModel", function() {
 
 
 
+});
+
+
+
+
+sprintapp.controller('GetAllSprintSummaryCntrl', function($scope, $uibModalInstance, noparameter,GetAllSprintSummary,GetSprintData) {
+
+	
+	
+		$scope.sprintSummayList =GetAllSprintSummary.query();
+
+
+
+		  $scope.submitUser = function () {
+		
+			$uibModalInstance.close("$scope.goalList");
+		//	$scope.usr = {name: '', job: '', age: '', sal: '', addr:''};
+  		};
+		$scope.selectedSprint = function (index) {
+			alert("selected sprint"+ $scope.sprintSummayList[index].name);	
+
+		var goal =	GetSprintData.get({"sprintId": $scope.sprintSummayList[index].id});
+		alert(goal);
+			$uibModalInstance.close("goal");
+		  };
+});
+
+
+sprintapp.controller('msgpopupCntrl', function($scope, $uibModalInstance, msg) {
+
+	
+	
+		
+		$scope.msgList = msg;
+
+		  $scope.cancel = function () {
+			
+			$uibModalInstance.close("success");
+		//	$scope.usr = {name: '', job: '', age: '', sal: '', addr:''};
+  		};
+		
 });

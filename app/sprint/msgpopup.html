@@ -1,0 +1,15 @@
+<form class="form-horizontal" role="form" ng-submit="submitUser()" name="goalpopup">
+  <div class="modal-header" style="background-color:#DB7093;">
+            <h4 class="modal-title" style="color:white">Alert</h4>
+  </div>
+  <div class="modal-body" align="center">  
+
+  <h4   ng-repeat="msg in msgList">{{msg}}</h4>
+
+
+    <div class="modal-footer">
+       <button class="btn btn-primary btn-sm" type="button" ng-click="cancel()">OK</button>
+     
+    </div>
+  </div>  
+</form>

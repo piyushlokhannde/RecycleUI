@@ -1,57 +1,90 @@
 <div  style="background-color:#DB7093;font-family: serif;" align="center" >
   <font  size="8" color="white">Sprint</font>
 </div>
-<div   ng-app="myApp.sprint" align="center" ng-init="projectLevelAvg=40";>
+<div   ng-app="myApp.sprint" align="center" ng-init="getProjectLevelAvg()";>
 <br>
 
 
 
 <div style="width:70%" >
-
-
+<button class="btn btn-success  btn-lg" ng-click="loadSprint()"  ng-model="checkModel.left" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Load Sprint">Load</button>
 <button class="btn btn-success  btn-lg"  ng-model="checkModel.left" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Delete Sprint">Delete</button>
  <button class="btn btn-success  btn-lg" ng-model="checkModel.left" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Cancel Changes">Cancel</button>
-  <button class="btn btn-success  btn-lg" ng-model="checkModel.left" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Save Sprint Data">Save </button>
-  <button class="btn btn-success btn-lg" ng-model="checkModel.middle" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Start Sprint">Start</button>
-  <button class="btn btn-success btn-lg" ng-model="checkModel.right" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="End Sprint">End</button>
-  <button class="btn btn-success btn-lg" ng-model="checkModel.right" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Commit Sprint">Commit </button>
+  <button class="btn btn-success  btn-lg"  ng-click="save()" ng-model="checkModel.left" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Save Sprint Data">Save </button>
+  <button class="btn btn-success btn-lg" ng-model="checkModel.middle" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Start Sprint"  ng-click="startSprint()" >Start</button>
+  <button class="btn btn-success btn-lg" ng-model="checkModel.right" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="End Sprint"  ng-click="endSprint()">End</button>
+  <button class="btn btn-success btn-lg" ng-model="checkModel.right" uib-btn-checkbox data-toggle="tooltip" data-placement="top" title="Commit Sprint"   ng-click="commitSprint()">Commit </button>
 
 
 <br>
 <br>
 <div id="paneldiv"  style="width:100%"  align="left">
 <uib-accordion close-others="true" id="parent"  >
-  <uib-accordion-group heading="Sprint Details" panel-class="panel-primary " >
-        <div class=" form-group"    align="left"  > 
-             <div class="col-sm-2 well well-sm"> 
-                 <label for="sprintID">Sprint Id : </label>
-               <input type="text" class="input-sm" id="sprintID" maxlength="8" size="8"  disabled="true" value={{sprint.id}}>                           
-             </div>              
-             <div class="col-sm-9 well well-sm">  
-                     <label for="sprintName">Sprint Name/Description :</label>
-               <input type="text" class="input-sm" id="sprintName" maxlength="110" size="110"   value={{sprint.name}}>    
-             </div>
+  <uib-accordion-group heading="Sprint Details" panel-class="panel-primary" is-open=true>
+       
+    <div class=" form-group"    align="left"  > 
+        <div class="col-sm-2 well well-sm"> 
+            <label for="sprintID">Sprint Id : </label>
+            <input type="text" class="input-sm" id="sprintID" maxlength="8" size="8"  disabled="true" ng-model='sprint.id' value={{sprint.id}} >                           
+        </div> 
+         <div class="col-sm-2 well well-sm">  
+           <label for="sprintStatus">Sprint Status : </label>
+              <input type="text" class="input-sm" id="sprintStatus"  disabled="true" maxlength="10" size="10" ng-model='sprint.sprintStatus' value={{sprint.sprintStatus}}>         
+         
+        </div>             
+        <div class="col-sm-8 well well-sm">  
+            <label for="sprintName">Sprint Name/Description :</label>
+            <input type="text" class="input-sm" id="sprintName" maxlength="100" size="100" ng-model='sprint.name'  value={{sprint.name}}    >    
+        </div>
+    </div>
+
+    <div class=" form-group"    align="left" >
+        <div class="col-sm-3 well well-sm" >
+            <label for="startDate">Start Date : </label>
+            <p class="input-group">
+                <input type="text" id ="startDate" class="form-control input-sm" uib-datepicker-popup ng-model="sprint.startDate" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close"    />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default btn-sm" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i>
+                    </button>
+              </span>
+            </p>  
         </div>
 
-          <div class=" form-group"    align="left"  > 
-             <div class="col-sm-3 well well-sm"> 
-                 <label for="startDate">Start Date : </label>
-               <input type="text" class="input-sm" id="startDate" maxlength="10" size="10"  value={{sprint.startDate}}>                           
-             </div>              
-             <div class="col-sm-6 well well-sm">  
-                     <label for="endDate">End Date :</label>
-               <input type="text" class="input-sm" id="endDate" maxlength="10" size="10"   value={{sprint.endDate}}>    
-             </div>
-        </div>
+       <div class="col-sm-3 well well-sm">  
+          <label for="endDate">End Date :</label>
+          <p class="input-group" >
+            <input type="text" id="endDate"  class="form-control input-sm" uib-datepicker-popup ng-model="sprint.endDate" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close "  ng-blur ="setNoDays()"/>
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default btn-sm" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i>
+              </button>
+            </span>
+          </p>                   
+      </div>
+       <div class="col-sm-2 well well-sm">  
+          <p class="input-group" >
+            <label for="workingDays">No. Working Days :</label>
+              <input type="text" class="input" id="workingDays" maxlength="2" size="2"  style="margin-top:3px;" ng-model='sprint.noOfDays'  value={{sprint.noOfDays}}  >           
+          </p>
+      </div>
+      <div class="col-sm-4">
+            <p class="input-group">&nbsp;</p>
+      </div>
+  </div>
+  
 
+
+    
   </uib-accordion-group>
 
-  <uib-accordion-group heading="Team Details" panel-class="panel-primary">
+  <uib-accordion-group  panel-class="panel-primary" >
+     <uib-accordion-heading>
+            <span ng-click="fetchTeamData()">Team Details</span>
+     </uib-accordion-heading>
 
      <div class="form-group" align="left" >
       <div class="col-sm-2" align="center"> 
         <div class="btn-group" uib-dropdown > 
-             <button id="selectTeam" type="button" class="btn btn-danger btn-sm" uib-dropdown-toggle ng-disabled="disabled">
+             <button id="selectTeam" type="button" class="btn btn-danger btn-sm" uib-dropdown-toggle >
                Select Team <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="selectTeam">
@@ -73,13 +106,14 @@
     
     <br>
     <div class="form-group" align="center">
-      <uib-alert ng-repeat="teamMember in teamMembers"  type="danger" style="width:50%" close="removeTeamMember(teamMember, $index)" align='center'><font color="black">{{teamMember.empName}}</font></uib-alert>
+      <uib-alert ng-repeat="teamMember in teamMembers"  type="danger" style="width:50%" close="removeTeamMember(teamMember, $index)" align='center'>
+      <font color="black">{{teamMember.empName}} # {{teamMember.teamMemberTotal}} </font></uib-alert>
    </div>
    <br>
    <br>
    <div class="form-group" align="center">
        <div class="btn-group" uib-dropdown > 
-             <button id="selectTeamMember" type="button" class="btn btn-danger btn-lg" uib-dropdown-toggle ng-disabled="disabled">
+             <button id="selectTeamMember" type="button" class="btn btn-danger btn-lg" uib-dropdown-toggle >
                Select Team Member<span class="caret"></span>
             </button>
             <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="selectTeamMember">
@@ -121,19 +155,29 @@
             <uib-accordion-group  ng-click="setparameter($parent.$index, $index)" ng-repeat="parameter in goal.sprintParameters"   id ="{{parameter.name}}" heading="{{parameter.name}}" panel-class="panel-info">
               <div class="form-group"> 
                 <div class="col-sm-8" align="left"> 
-                  <font size="3" ng-if="true"><b>Please enter the expected value in range.<b></font>
-                  <font size="3" ng-if="true"><b>Please enter the expected value.<b></font>
-                  <font size="3" ng-if="true"><b>Please enter the number of instances.<b></font>
-                  <font size="3" ng-if="true"><b>Please enter the actual value.<b></font>
+                  <font size="4" ng-if="true"><b>{{parameter.name}} :<b></font>
                 </div>
                 <div class="col-sm-4" align="right"> 
                   <label for="inputWarning">Parameter Percentage:</label>
                   <input type="text" class="input-sm" id="paramPercent" maxlength="3" size="3"  disabled="true" value={{parameter.weightage}}> % 
                 </div>
               </div>
+               <div class="form-group"> 
+                <div class="col-sm-8" align="left"> 
+                    <p>{{parameter.description}}</p>
+                </div>
+             </div>
+             <br>
               <br>
               <br>
-
+              <div class="form-group"> 
+                <div class="col-sm-12" align="left"> 
+                  <font  ng-if="showParameters('RANGE',parameter)">Please enter the expected value in range.</font>
+                  <font ng-if="showParameters('FIXED',parameter)">Please enter the expected value.</font>
+                  <font  ng-if="showParameters('LEVEL',parameter)">Please enter the number of instances.</font>
+                  <font  ng-if="false">Please enter the actual value.</font>
+                </div>
+              </div>  
               <span ng-if="showParameters('RANGE',parameter)" >
                 <div class="form-group "> 
                   <div class="col-sm-4 well well-sm" align="left"> 
@@ -164,19 +208,23 @@
              <span ng-if="showParameters('LEVEL', parameter)" >
               <div class="form-group" > 
                 <div class="col-sm-12 well well-sm" align="left"> 
-                  <label for="inputWarning">Inovation1: </label>  
+                  <label for="inputWarning">At Sprint Level </label>  
                    <input type="text" class="input-sm" id="{{parameter.name}}_actual" " maxlength="5" size="5"   value={{parameter.actualValue}}>                                  
                 </div> 
               </div>    
                 <div class="form-group" > 
                 <div class="col-sm-12 well well-sm" align="left"> 
-                  <label for="inputWarning">Inovation1: </label>  
+                  <label for="inputWarning">At Project Level </label>  
                    <input type="text" class="input-sm" id="{{parameter.name}}_actual" " maxlength="5" size="5"   value={{parameter.actualValue}}>                                  
                 </div> 
                 </div> 
                 <div class="form-group" > 
                 <div class="col-sm-12 well well-sm" align="left"> 
-                  <label for="inputWarning">Inovation1: </label>  
+                  <label for="inputWarning">At FIS Level </label>  
+                   <input type="text" class="input-sm" id="{{parameter.name}}_actual" " maxlength="5" size="5"   value={{parameter.actualValue}}>                                  
+                </div>  
+                <div class="col-sm-12 well well-sm" align="left"> 
+                  <label for="inputWarning">At Industry Level</label>  
                    <input type="text" class="input-sm" id="{{parameter.name}}_actual" " maxlength="5" size="5"   value={{parameter.actualValue}}>                                  
                 </div>               
               </div> 
